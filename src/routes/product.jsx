@@ -50,6 +50,7 @@ function ProductRoute (){
                     setError(true)
                 }
             }
+            handleGetProduct()
     }, [id])
 
     if (error === true) {
