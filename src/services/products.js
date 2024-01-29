@@ -3,7 +3,7 @@ const URL = import.meta.env.VITE_URL
 
 export const getProduct = async (id) => {
     try {
-        const product = axios.get(URL+'product/'+id)
+        const product = await axios.get(URL+'product/'+id)
         return product.data
     } catch (e) {
         throw e
