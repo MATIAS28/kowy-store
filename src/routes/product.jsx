@@ -6,13 +6,12 @@ import Loader from '../components/loader'
 import Error from '../components/error404'
 
 import { ShoppingBagIcon} from '@heroicons/react/24/solid'
-import axios from 'axios'
 
 import { cartContext } from '../context/cartContext/cartContext'
 import { addProduct } from '../context/cartContext/action'
 
-import { URL } from '../global'
 import toast, { Toaster } from 'react-hot-toast';
+import { getProduct } from '../services/products'
 
 
 function ProductRoute (){
@@ -41,12 +40,16 @@ function ProductRoute (){
     }
 
     useEffect(() => {
-            axios.get(URL+'product/'+id).then(res => {
-            console.log(res.data);
-            setIsLoaded(true)
-            setProduct(res.data.product)
-            setImgPreview(res.data.product.imgs[0].url)
-            }).catch((e) => {if (e.response.status == 500 || e.response.status == 404) setError(true)})
+            const handleGetProduct = async () => {
+                try {
+                    const Product = await getProduct(id)
+                    setIsLoaded(true)
+                    setProduct(Product)
+                    setImgPreview(Product.imgs[0].url)
+                } catch (e) {
+                    setError(true)
+                }
+            }
     }, [id])
 
     if (error === true) {
