@@ -1,5 +1,5 @@
 import axios from "axios"
-import { URL } from "../../global"
+const URL = import.meta.env.VITE_URL
 
 export async function registerUser({...userToRegister}){
     const register = await axios.post(URL+'register/', userToRegister)
