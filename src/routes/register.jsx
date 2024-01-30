@@ -4,7 +4,7 @@ function Register(){
 
     return(
         <div id="register-container" className="min-h-screen bg-gray-50">
-            <div id="form-container" className="w-3/6 h-96 mt-12">
+            <div id="form-container" className="w-3/6 my-12">
             <RegisterComponent/>
             </div>
             

@@ -28,11 +28,11 @@ function Home(){
                 </div>
             </div>
 
-        <ArticleCarousel cat="Piluso" limit={4}/>
+        <ArticleCarousel cat="remera" limit={4}/>
         
         <NewArrivalsComponent/>
 
-        <ArticleCarousel cat="campera" limit={4}/>
+        <ArticleCarousel cat="Piluso" limit={4}/>
 
         </>
     )

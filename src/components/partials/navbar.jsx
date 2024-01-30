@@ -13,7 +13,7 @@ const Navbar  = ({setSearch, search}) => {
   const [expand, setExpand] = useState(false)
   const [isLoged, setIsLoged] = useState('white')
   const {user} = useContext(AuthContext)
-  const {cart, expandCart, setExpandCart} =  useContext(cartContext)
+  const {cart, setExpandCart} =  useContext(cartContext)
   const [expandCategories, setExpandCategories] = useState(null)
   const [productsCount, setProductsCount] = useState(0)
   

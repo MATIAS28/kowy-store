@@ -41,7 +41,7 @@ export const MobileNavbar = ({setSearch, search}) => {
             </Link>
 
 
-            <button className=' flex items-center duration-75 ease-in-out w-12 h-12' 
+            <button className=' flex items-center duration-75 ease-in-out w-fit h-12' 
             onClick={() => setExpandCart(prevState => prevState === 'slide-in' ? 'slide-out' : 'slide-in')}>
             <ShoppingBagIcon className="h-6 w-6" fill='white'/>
             {cart.length > 0 && <span className='text-lg mx-1 text-white'>{productsCount}</span>}

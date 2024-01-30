@@ -19,7 +19,7 @@ export const Profile = ({userData, setSectionSelector, sectionSelector}) => {
                 <h2 className="text-center text-white text-lg">{userData.user.email}</h2>
                 </div>
 
-                <div className="flex-col w-full p-4 space-y-4">
+                <div className="flex items-center md:flex-col w-full p-4 md:space-y-4">
                     <button onClick={() => setSectionSelector(true)} 
                     className={`flex justify-center items-center rounded-lg 
                     space-x-1 w-full hover:bg-gray-100/25 p-2 ${sectionSelector ? 'bg-gray-100/25' : ''}`}>

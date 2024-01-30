@@ -32,6 +32,7 @@ function LoginComponent({b}){
             e.target.reset()
             toast.success('Sesión Iniciada')
         } catch (e) {
+            toast.error('Error al iniciar session')
             setError(e.message || e.response.data.message)
         }
     }
@@ -67,9 +68,8 @@ function LoginComponent({b}){
       },
     },
   }} position="bottom-right" reverseOrder={false}/>
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
+        <form className="primary shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
         <h1 className="text-center text-3xl font-semibold my-4">Iniciar Sesión</h1>
-        {error != undefined && <p className="w-full rounded bg-red-600 p-2 my-3 font-light opacity-90 text-white">{error}</p>}
             <div className="mb-4">
             <label className="block text-gray-800 text-sm font-bold mb-2" htmlFor="email">
                 Email
@@ -83,10 +83,12 @@ function LoginComponent({b}){
             <input disabled={!user ? false : true} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="contraseña" onChange={(e) => setPassword(e.target.value)} onBlur={handleBlur} autoComplete="current-password"/>
             </div>
             <div className="flex items-center justify-between">
-            <button className="bg-blue-500 text-white duration-500 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:opacity-25" disabled={isValid && !user || user} type="submit">
+            
+            <button className="bg-black text-white duration-500 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:opacity-25" disabled={isValid && !user || user} type="submit">
                 Iniciar Sesión
             </button>
-            <Link style={{display: b ? 'block' : 'none'}} to='/register' className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+
+            <Link style={{display: !user ? 'block' : 'none'}} to='/register' className="inline-block align-baseline font-bold text-base text-black border-black hover:border-b-2" href="#">
                 Crear cuenta
             </Link>
             </div>

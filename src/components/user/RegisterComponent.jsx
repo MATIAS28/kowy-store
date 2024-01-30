@@ -43,9 +43,13 @@ function RegisterComponent({b}){
     }
     return(
         <>
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
+        <form className="primary shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
         <h1 className="text-center text-3xl font-semibold my-4">Registro</h1>
-        {error != undefined && <p className="w-full rounded bg-red-600 p-2 my-3 font-light animate-pulse text-white">{error}</p>}
+
+        {error != undefined && 
+        <p className="w-full rounded secondary p-2 my-3 font-light animate-pulse text-white">{error}</p>
+        }
+
         {registerSuccess != undefined && <p className="w-full rounded bg-gray-600 p-2 my-3 font-light flex items-center text-white"><CheckCircleIcon className="w-5 h-5 mx-2"/> {registerSuccess}, inicia sesion</p>}
         <div className="mb-4">
             <label className="block text-gray-800 text-sm font-bold mb-2" htmlFor="name">
@@ -73,13 +77,17 @@ function RegisterComponent({b}){
             </label>
             <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="contraseña" onChange={handleInputChange} onBlur={handleBlur}/>
             </div>
+
             <div className="flex items-center justify-between">
-            <button className="bg-blue-500 text-white duration-500 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:opacity-25"  type="submit">
+
+            <button className="bg-black text-white duration-500 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:opacity-25"  type="submit">
                 Registrar
             </button>
-            <Link style={{display: b ? 'block' : 'none'}} to='/login' className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+
+            <Link to='/login' className="inline-block align-baseline font-bold text-base text-black border-black hover:border-b-2">
                 Iniciar Sesión
             </Link>
+
             </div>
         </form>
     </>

@@ -39,7 +39,7 @@ function User () {
         <Profile userData={userData} setSectionSelector={setSectionSelector} 
         sectionSelector={sectionSelector}/>
 
-        <div className="flex w-full">
+        <div className="flex w-full p-0 md:p-2 my-4 md:my-0">
             {sectionSelector ? <div id="user-data" className="">        
                 <Orders orders={userData.orders}/>
             </div>

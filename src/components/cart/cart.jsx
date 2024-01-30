@@ -1,11 +1,18 @@
-import { useContext} from "react"
+import { useContext, useEffect} from "react"
+import { useLocation } from 'react-router-dom'
 import { cartContext } from "../../context/cartContext/cartContext"
+
 import { Link } from "react-router-dom"
 import { ExclamationCircleIcon, ArrowRightCircleIcon} from "@heroicons/react/24/solid"
 import { ProductCart } from "./product-cart"
 
 function Cart(){
-    const {cart, expandCart, total} = useContext(cartContext)
+    const {cart, expandCart, setExpandCart, total} = useContext(cartContext)
+    const location = useLocation()
+    useEffect(() => {
+        setExpandCart(false)
+    }, [location])
+
     return(
       <aside id={expandCart} className='fixed cart right-0 w-1/3 duration-150 flex-col ease-in-out primary rounded-b shadow z-20'>
         
@@ -17,8 +24,8 @@ function Cart(){
                 cart.length === 0 && 
                 <div className="flex items-center justify-center w-full h-[16rem] p-5">
                     <div className="flex flex-col items-center text-center">
-                        <ExclamationCircleIcon className="w-12 h-12" fill="white"/>
-                        <p className="w-full text-xl my-2 text-gray-400">El carrito esta vacío</p>
+                        <ExclamationCircleIcon className="w-9 h-9" fill="black"/>
+                        <p className="w-full text-lg my-2">El carrito esta vacío</p>
                     </div>
                 </div>
             }

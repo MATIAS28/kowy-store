@@ -36,8 +36,8 @@ const ArticleCarousel = ({cat, limit}) => {
             <h1 className="text-4xl py-5 text-gray-700 font-bold mx-auto">{cat.toUpperCase()+'S'}</h1>
             </div>
 
-            <div id='articles' className='mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-            {products && !error  ? 
+            <div id='articles' className='mx-auto grid max-w-6xl w-3/5 md:w-full grid-cols-1 gap-6 md:p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+            {isLoaded && products && !error  ? 
                 products.map((product, i) => {
                     return <Product key={i} img={product.imgs[0].url} brand={product.brand} name={product.name} price={product.price} id={product._id} colors={product.colors} />
                 })

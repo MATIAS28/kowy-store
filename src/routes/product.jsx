@@ -43,6 +43,7 @@ function ProductRoute (){
             const handleGetProduct = async () => {
                 try {
                     const Product = await getProduct(id)
+                    console.log(Product);
                     setIsLoaded(true)
                     setProduct(Product)
                     setImgPreview(Product.imgs[0].url)
