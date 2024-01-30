@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Primary';
+    src: url('./assets/fonts/f5.ttf') format('truetype');
+}
+
+body{
+    font-family: 'Primary';
+    background: #f5f5f4;
+}
+
+.primary{
+    background-color: #EAEB46;
+}
+
+.primaryColor{
+    color: #EAEB46;
+}
+
+.secondary{
+    background-color: #141414;
+}
+
+.secondaryColor{
+    color: #141414;
+}
+
+#navbar-mobile{
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+
+    #navbar-mobile{
+        display: initial ;
+    }
+
+    #navbar-desktop{
+        display: none;
+    }
+}
+
+#order-container{
+    background-color: #141414;
+}

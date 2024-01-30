@@ -1,0 +1,21 @@
+import axios from "axios"
+const URL = import.meta.env.VITE_URL
+
+export const getProductsByCategory = async (category, limit) => {
+    try {
+        const products = await axios.get(URL+'products/'+limit, {category: category})
+        return products.data
+    } catch (e) {
+        throw e
+    }
+}
+
+export const searchProduct = async (search) => {
+    console.log(search);
+    try {
+        const products = await axios.post(URL+'search-product', {name: search})
+        return products.data
+    } catch (e) {
+        
+    }
+}
