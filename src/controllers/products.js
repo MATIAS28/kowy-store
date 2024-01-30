@@ -60,15 +60,20 @@ function updateProduct(req, res){
 }
 
 function getProducts(req, res){
-    const {...filters} = req.body;
+    const category = req.params.category ? {category: req.params.category} : {}
     const limit = req.params.limit && req.params.limit > 0 ? req.params.limit : 0
-    
-        Product.find(filters, (e, products) => {
-            if(e) return res.status(500).send({message: 'Error al devolver los productos'})
-            if(!products || products.length === 0) return res.status(404).send({message: 'No se encontraron productos'})
-        
-            return res.status(200).send(products)
-        }).limit(limit)
+
+    try {
+        const products = Product.find(category).limit(limit)
+
+        if(!products || products.length === 0) {
+        return res.status(404).send({message: 'No se encontraron productos'})
+        }
+
+        return res.status(200).send(products)
+    } catch (e) {
+        res.status(500).send({message: 'Error al devolver los productos'})
+    }
 }
 
 function getProduct(req, res){
