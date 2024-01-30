@@ -11,6 +11,8 @@ function signin (req, res){
 User.findOne({email: params.email}, (err, results) => {
     if(err) return res.status(500).send({message: 'Error al registrar el usuario'})
 
+    console.log(results);
+
     if(results){
         return res.status(500).send({message: 'El usuario ya existe'});
 
@@ -30,7 +32,7 @@ User.findOne({email: params.email}, (err, results) => {
                 if(err) return res.status(500).send({message: 'error al registrar el usuario'})
 
                 if(userSaved){
-                    return res.status(200).send({message: 'Usuario guardado con exito'})
+                    return res.status(201).send({message: 'Usuario guardado con exito'})
                 }
             })
 

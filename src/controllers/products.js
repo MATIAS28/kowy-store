@@ -59,13 +59,12 @@ function updateProduct(req, res){
     })
 }
 
-function getProducts(req, res){
+async function getProducts(req, res){
     const category = req.params.category ? {category: req.params.category} : {}
     const limit = req.params.limit && req.params.limit > 0 ? req.params.limit : 0
 
     try {
-        const products = Product.find(category).limit(limit)
-
+        const products = await Product.find(category).limit(limit)
         if(!products || products.length === 0) {
         return res.status(404).send({message: 'No se encontraron productos'})
         }
