@@ -80,14 +80,16 @@ export const ShippingInfoComponent = ({shippingInfo ,setShippingInfo, userPage, 
     }
 
     return(
-        <div style={{width: userPage ? '100%' : '50%'}} className="bg-black rounded p-3 mx-0 md:mx-2">
+        <div className={`bg-black rounded p-3 mx-0 md:mx-2 
+        ${userPage ? 'w-full' : 'w-full md:w-3/5'}`}>
         <h3 className="text-white text-xl font-semibold text-center">Agrega una direccion</h3>
         <Toaster position="top-center" reverseOrder={false}/>
 
         {/*Direcciones*/}
 
-        {!userPage && <div className="w-full">
-          <h3 className="text-white font-semibold p-2">Tus Direcciones</h3>
+        { addresses.length > 0 && !userPage && 
+        <div className="w-full">
+            <h3 className="text-white font-semibold p-2">Tus Direcciones</h3>
             <div className="flex w-full overflow-x-auto space-x-8 p-3">
             {addresses.length > 0 && addresses.map((address, i) => {
             return(
@@ -105,7 +107,8 @@ export const ShippingInfoComponent = ({shippingInfo ,setShippingInfo, userPage, 
             )
             }) }
             </div>
-            </div>}
+            </div>
+            }
 
         <form className="grid grid-cols-3 md:grid-cols-4 gap-3 md:gap-6 p-3 " onSubmit={AddAdress}>
 
@@ -151,7 +154,7 @@ export const ShippingInfoComponent = ({shippingInfo ,setShippingInfo, userPage, 
         <input className="input-shipping-info text-xs md:text-base" defaultValue={shippingInfo?.neighborhood}  id="neighborhood" onBlur={handleBlur} onChange={handleChange}/>
         </div>
 
-        <div className="col-span-2 w-fit my-4">
+        <div className="col-span-2 w-full my-4">
         <label className="text-xs md:text-base" htmlFor="address">
         Direccion
         </label>
@@ -172,9 +175,9 @@ export const ShippingInfoComponent = ({shippingInfo ,setShippingInfo, userPage, 
         <input className="input-shipping-info text-xs md:text-base" defaultValue={shippingInfo?.dni} id="dni" type="tel" onBlur={handleBlur} onChange={handleChange}/>
         </div>
 
-        <div className="col-span-2 flex items-center justify-end w-full mt-2">
+        <div className="col-span-2 flex items-end justify-end w-full">
         <button type="submitt" disabled={btn} 
-        className="primary rounded-xl p-2 w-40 h-12 text-semibold text-black" >
+        className="primary rounded-xl text-sm p-2 w-40 h-fit text-semibold text-black text-center" >
             Agregar Direccion
         </button>
         </div>

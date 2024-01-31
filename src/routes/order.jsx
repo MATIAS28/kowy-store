@@ -56,8 +56,8 @@ function Order(){
             </ul>
 
             <div id="stepper" className="px-8 min-h-screen">
-                <div id="steps-container" className="flex justify-center">
-                {steps[step]}
+                <div className="md:flex justify-center w-full">
+                    {steps[step]}
                 </div>
                 <div className="flex justify-center mt-7">
                     <button disabled={btn} className="rounded w-72 bg-black primaryColor py-2 px-4"
