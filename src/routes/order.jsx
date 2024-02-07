@@ -31,7 +31,7 @@ function Order(){
             setBtn(true)
         }
 
-        if(step == 1 && Object.keys(shippingInfo).length === 9) {
+        if(step == 1 && Object.keys(shippingInfo).length >= 9) {
             setBtn(false)
         }
 
@@ -60,7 +60,7 @@ function Order(){
                     {steps[step]}
                 </div>
                 <div className="flex justify-center mt-7">
-                    <button disabled={btn} className="rounded w-72 bg-black primaryColor py-2 px-4"
+                    <button disabled={btn} className="rounded w-72 bg-black primaryColor py-2 px-4 disabled:opacity-50"
                     onClick={() => step === 2 ? setSteps(prev => prev-1) : setSteps(prev => prev+1)}>{step === 2 ? 'Atras' : 'Siguiente'} </button>
                 </div>
             </div>

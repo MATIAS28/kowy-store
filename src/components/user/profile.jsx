@@ -7,39 +7,44 @@ import { MapPinIcon, ShoppingBagIcon, UserIcon } from "@heroicons/react/24/solid
 export const Profile = ({userData, setSectionSelector, sectionSelector}) => {
     const dispatch = useContext(DispatchContext)
     return(
-        <div className="bg-black rounded-lg shadow-sm w-full md:w-1/4 h-fit md:my-0">
+        <div className="relative grid grid-cols-1 secondary shadow-sm w-full md:w-1/3 lg:w-1/4 h-fit md:h-screen m-0">
 
-               <div className="w-full h-full">
-                <div className="flex justify-center items-center primary h-32 rounded-t-lg">
-                    <UserIcon className="w-9 h-9" fill="black"/>
+               <div className="w-full h-fit md:h-full">
+
+                <div className="flex justify-center items-center h-32">
+                    <div className="primary p-5 rounded-3xl">
+                        <UserIcon className="w-12 h-12" fill="black"/>
+                    </div>
                 </div>
 
-                <div className="flex-col my-2">
-                <h1 className="text-center text-white font-semibold text-xl">{userData.user.name+' '+userData.user.surname}</h1>
-                <h2 className="text-center text-white text-lg">{userData.user.email}</h2>
+                <div className="h-fit flex-col my-2">
+                <h1 className="text-center text-white font-semibold text-2xl">{userData.user.name+' '+userData.user.surname}</h1>
+                <h2 className="text-center text-white text-xl">{userData.user.email}</h2>
                 </div>
 
-                <div className="flex items-center md:flex-col w-full p-4 md:space-y-4">
+                <div className="flex items-center w-full p-2 h-2/4">
+                  <div className="flex md:block w-full md:space-y-6">
                     <button onClick={() => setSectionSelector(true)} 
                     className={`flex justify-center items-center rounded-lg 
                     space-x-1 w-full hover:bg-gray-100/25 p-2 ${sectionSelector ? 'bg-gray-100/25' : ''}`}>
                         <ShoppingBagIcon className="w-6 h-6" fill="white"/>
-                        <span className="text-white">Compras</span>
+                        <span className="text-white text-xl">Compras</span>
                     </button>
 
                     <button onClick={() => setSectionSelector(false)} 
                     className={`flex justify-center items-center rounded-lg 
                     space-x-1 w-full hover:bg-gray-100/25 p-2 ${!sectionSelector ? 'bg-gray-100/25' : ''}`}>
                         <MapPinIcon className="w-6 h-6" fill="white"/>
-                        <span className="text-white">Direcciones</span>
+                        <span className="text-white text-xl">Direcciones</span>
                     </button>
+                  </div>
                 </div>
-                
-                <button onClick={() => logoutUser(dispatch)} 
-                    className="text-center w-full bg-red-600 text-white p-2 md:rounded-b-lg">
+            </div>
+
+            <button onClick={() => logoutUser(dispatch)} 
+                className="relative md:absolute bottom-0 text-center w-full text-red-500 text-xl font-semibold my-2 p-2">
                     Cerrar sesión
-                </button>
-               </div>
+            </button>
 
         </div>
     )

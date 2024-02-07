@@ -8,7 +8,7 @@ import { removeProduct } from "../../context/cartContext/action"
 export const ProductCart = ({product, color, pay}) => {
     const {cart, dispatch, total} = useContext(cartContext)
     return(
-        <div className="flex items-center my-2 px-1">
+        <div className="flex items-center my-2">
             <Link className="duration-150 hover:border w-full" to={'/product/'+product._id}>
             <li className="flex items-center p-2 max-h-20 justify-between">
 
@@ -22,11 +22,11 @@ export const ProductCart = ({product, color, pay}) => {
             </div>
 
             <div className="flex items-center bg-black w-fit space-x-3 px-3 py-1 rounded-lg">
-                <p className={pay ? "text-sm" : "text-xs text-white font-semibold"}>
+                <p className="text-xs text-white font-semibold">
                     talle: {product.size}
                 </p>
 
-                <p className={pay ? "text-xs mr-1" : "text-xs text-white font-semibold"}>
+                <p className="text-xs text-white font-semibold">
                     X{product.quantity}
                 </p>
             </div>

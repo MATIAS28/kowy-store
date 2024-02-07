@@ -52,35 +52,35 @@ const Navbar  = ({setSearch, search}) => {
             </div>
             
             <div className="btn-container">
-            <ul id='btn-menu' className='flex items-center'>
+            <div id='btn-menu' className='flex items-center'>
 
-            <li className='btn transition duration-75 ease-in-out mr-7'>
+            <button className='btn transition duration-75 ease-in-out mr-7'>
                 <a target='_blank'
                 href='https://www.instagram.com/kowy.store?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=='>
                 <img className='w-6 h-6' src="/logo-ig.png" alt="" />
                 </a>
-            </li>
+            </button>
 
-            <li className='btn transition duration-75 ease-in-out mr-7'>
+            <button className='btn transition duration-75 ease-in-out mr-7'>
                 <Link to={user != undefined ? '/user' : '/login'}>
                 <UserIcon className="h-6 w-6" fill={isLoged}/>
                 </Link>
-            </li>
+            </button>
 
 
               <div className='cart-menu'>
-              <li className='btn flex items-center duration-75 ease-in-out w-12 h-12' onClick={() => setExpandCart(prevState => prevState === 'slide-in' ? 'slide-out' : 'slide-in')}>
+              <button className='btn flex items-center duration-75 ease-in-out w-12 h-12' onClick={() => setExpandCart(prevState => prevState === 'slide-in' ? 'slide-out' : 'slide-in')}>
                 <ShoppingBagIcon className="h-6 w-6" fill='white'/>
                 {cart.length > 0 && <span className='text-lg ml-1 text-white'>{productsCount}</span>}
-              </li>
+              </button>
               
-              <li className='btn hidden'>
+              <button className='btn hidden'>
                 <a onClick={() => setExpand(!expand)}>
                 <Bars3BottomLeftIcon className="h-7 w-7 fill-white"/>
                 </a>
-              </li>
+              </button>
               </div>
-            </ul>
+            </div>
             </div>
           </div>
 

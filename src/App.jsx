@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 
 import './App.css'
 import './index.css'
+import '../src/assets/css/buttons.css'
+
 import AppRoutes from './app-routes'
 import { AuthProvider } from './context/userContext/AuthContext'
 import { CartProvider } from './context/cartContext/cartContext'

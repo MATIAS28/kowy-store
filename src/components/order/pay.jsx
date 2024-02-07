@@ -11,8 +11,10 @@ export const Pay = ({shippingInfo, token, user}) => {
     
     const getPayLink = async () => {
         toast.loading('Espera...')
-        const Link = await  axios.post(URL+'order', {shippingInfo: shippingInfo, products: cart, user: user, totalPrice: total}, {headers:{'auth-token': token}})
+        const order = {shippingInfo: shippingInfo, products: cart, user: user, totalPrice: total}
+        const Link = await  axios.post(URL+'order', order, {headers:{'auth-token': token}})
         setLink(Link.data)
+        console.log(order)
     }
 
     useEffect(() => {
@@ -81,11 +83,10 @@ export const Pay = ({shippingInfo, token, user}) => {
 
             {/*Productos del carrito*/}
             
-            <div id="products" 
-            className="bg-black p-3 border border-gray-600 flex-col rounded-lg w-3/5 h-full dropshadow-lg">
-                <div className="">
-                <h3 className="text-xl font-semibold text-white my-2">Productos</h3>
-                    <ul className={cart.length > 2 ? 'flex flex-col overflow-y-scroll h-[12.5rem] bg-white rounded-lg' : 'flex flex-col'}>
+            <div className="flex-col w-full md:w-3/5">
+                <div className="primary p-2 my-4 rounded-lg dropshadow">
+                <h3 className="text-xl font-semibold my-2">Productos</h3>
+                    <ul className={cart.length > 2 ? 'flex flex-col overflow-y-scroll h-[12.5rem] bg-white rounded-lg' : 'flex flex-col h-[12.5rem]'}>
                         {cart.length > 0 && cart.map((product, i) => {
 
                         return(
@@ -97,7 +98,7 @@ export const Pay = ({shippingInfo, token, user}) => {
 
                 {/*Informacion del pago*/}
 
-                <div className="mb-1 text-lg p-2 text-white ">
+                <div className="bg-black rounded-lg mb-1 text-lg p-3 text-white ">
                     <div className="flex justify-between mb-2">
                     <dt className="text-sm font-semibold">Subtotal</dt>
                     <dd className="mt-1 text-xs font-normal base:col-span-2 base:mt-0">${total}</dd>

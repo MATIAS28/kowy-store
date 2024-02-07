@@ -43,7 +43,6 @@ function ProductRoute (){
             const handleGetProduct = async () => {
                 try {
                     const Product = await getProduct(id)
-                    console.log(Product);
                     setIsLoaded(true)
                     setProduct(Product)
                     setImgPreview(Product.imgs[0].url)
@@ -107,7 +106,7 @@ function ProductRoute (){
             <div className="">
                 
                 <div className='flex items-center my-4'>
-                    <button className="w-full flex items-center justify-center rounded-xl bg-black text-white font-semibold py-2 mr-3" 
+                    <button className="button-jello w-full flex items-center justify-center rounded-xl bg-black text-white font-semibold py-2 mr-3" 
                     onClick={addProductHandler}>
                     <ShoppingBagIcon className="h-5 w-5  mr-2 "/>
                         Añadir al carrito
