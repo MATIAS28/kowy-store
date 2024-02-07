@@ -4,66 +4,62 @@ const Order = mongoose.Schema({
 
     shippingInfo:{
 
+        address:{
+            type: String,
+            required: [true, 'La direccion es obligatoria']
+        },
+
+        dni:{
+            type: String,
+            required: [true, 'El DNI es obligatorio']
+        },
+        
+        locality: {
+            type: String,
+            required: [true, 'La Localidad es obligatoria']
+        },
+        
+        name: {
+            type: String,
+            required: [true, 'EL nombre es obligatorio']
+        },
+
+        surname: {
+            type: String,
+            required: [true, 'El apellido es obligatorio']
+        },
+
+        neighborhood: {
+            type: String,
+            required: [true, 'El barrio es obligatorio']
+        },
+        
         phone_number: {
-            type: Number,
+            type: String,
             required: [true, 'El numero de telefono es obligatorio']
         },
-
-        name: {
-            type: String
+        
+        post_code: {
+            type: String,
+            required: [true, 'El codigo postal es obligatorio']
         },
 
-        adress:{
+        province: {
             type: String,
-            required: true
-        },
-
-        neighborhood:{
-            type: String,
-            required: true 
-        },
-
-        streets:{
-            type: String,
-            required: true
-        },
-
-        province:{
-            type: String,
-            required: true
-        },
-
-        locality:{
-            type: String,
-            required: true
-        },
-
-        post_code:{
-            type: String,
-            required: true
+            required: [true, 'La provincia es obligatoria']
         }
     },
 
     products:[
         {
-            id:{
+            _id:{
                 type: String,
                 required: [true, 'El id es obligartorio']
-            },
-
-            category: {
-                type: String,
-                required: [true, 'La categoria es obligatoria']
             },
 
             description:{
                 type: String,
                 required: [true, 'La descripcion es obligatoria']
-            },
-
-            color:{
-                type: String,
-                required: [true, 'El color es obligatorio']
             },
 
             size:{
@@ -114,9 +110,21 @@ const Order = mongoose.Schema({
         default: false
     },
 
-    paid: {
-        type: Boolean,
-        default: false
+    paymentInfo: {
+        id: {
+            type: Number,
+            default: null
+        },
+
+        date: {
+            type: String,
+            default: null
+        },
+        
+        paid: {
+            type: Boolean,
+            default: false
+        }
     }
 })
 

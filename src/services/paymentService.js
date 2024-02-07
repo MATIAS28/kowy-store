@@ -1,35 +1,52 @@
 const axios = require('axios');
+const { MercadoPagoConfig, Preference, Payment } = require('mercadopago')
+
+const client = new MercadoPagoConfig({accessToken: process.env.MP_AUTH})
+
+const MP_URL = process.env.MP_URL
+const MP_NOTIFICATION_URL = process.env.MP_NOTIFICATION_URL
+const MP_API = process.env.MP_API
 
 async function paymentService(items, id){
- const url = 'https://api.mercadopago.com/checkout/preferences'
+    const preference = new Preference(client)
 
- const body = {
-  items: items,
-
-  notification_url:'https://6da9-192-141-93-237.sa.ngrok.io/api/save-order/'+id,
-
-  back_urls: {
-    failure: "/failure",
-    pending: "/pending",
-    success: "/success"
-  },
-}
-
-  try {
-    const payment = await axios.post(url, body, {
-      headers: {
-        "Content-Type": "aplication/json",
-        Authorization: 'Bearer APP_USR-7086059441853470-100416-fcabc8b6e421e0c10b7715ba92196ea5-1203841275' 
+    const getPaymentLink = await preference.create({ body: 
+      {
+        items: items,
+        notification_url: MP_NOTIFICATION_URL+id
       }
     })
+    .then(res => res.init_point)
+    .catch(e => console.log(e));
 
-    return payment.data.init_point
+    return getPaymentLink
+}
 
+async function validatePaymentService (id){
+  const payment = new Payment(client);
+  const order = {
+    id: undefined,
+    date: undefined,
+    paid: false
+  }
+
+  try {
+    const getPayment = await payment.get({ id: id })
+
+    if(getPayment.status === 'approved' && getPayment.status_detail === 'accredited'){
+      order.id = id
+      order.date = getPayment.date_approved
+      order.paid = true
+    }
+
+    return {paymentInfo: order}
   } catch (e) {
-    return {message: 'Error al generar el link de pago'}
+    console.log(e);
+    throw e
   }
 }
 
 module.exports = {
-  paymentService
+  paymentService,
+  validatePaymentService
 }

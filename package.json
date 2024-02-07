@@ -10,7 +10,6 @@
   },
   "author": "Matias Muñoz",
   "license": "ISC",
-  
   "devDependencies": {
     "nodemon": "^2.0.19"
   },
@@ -24,6 +23,7 @@
     "express-fileupload": "^1.4.0",
     "fs-extra": "^10.1.0",
     "jsonwebtoken": "^8.5.1",
+    "mercadopago": "^2.0.7",
     "moment": "^2.29.4",
     "mongoose": "^6.5.2"
   }

@@ -1,5 +1,5 @@
 const Order = require('../models/order')
-const { paymentService } = require("../services/paymentService")
+const { paymentService, validatePaymentService } = require("../services/paymentService")
 
 //Guarda la orden en la base de datos
 const saveOrder = async (order, res) => {
@@ -38,7 +38,6 @@ async function createNewOrder(req, res){
     try {
     await saveOrder(order, res)
     } catch (e) {
-        console.log(e);
         return res.status(404).send({message: 'Error al guardar la orden'})
     }
 }
@@ -57,15 +56,28 @@ function getPaymentLink(req, res){
 }
 
 //valida el pago o hace el pago
-function validatePayment(req, res){
-    const id = req.params.id
+async function validatePayment(req, res){
+    const payment = req.query.topic ? req.query.topic : req.query.type
+    const {id} = req.params
+    
+    if (payment === 'merchant_order') {
+        return res.status(200).send('ok')
+    }
 
-    Order.findByIdAndUpdate(id, {paid: true}, (e, orderUpdated) => {
-        if(e) return res.status(500).send({message: 'Error al registrar el pago'})
-        if(!orderUpdated) return res.status(404).send({message: 'No se encontro la orden'})
-
-        return res.status(201).send({message: 'pagado exitosamente'})
-    })
+    try {
+        const paymentID = req.query['data.id']
+        const validation = await validatePaymentService(paymentID)
+        
+        if(validation.paymentInfo.paid){
+            await Order.findByIdAndUpdate(id, validation)
+        }
+        
+        return res.status(200).send('ok')
+        
+    } catch (e) {
+        console.log(e);
+        return res.status(500).send({message: 'Hubo un error al validar el pago'})
+    }
 }
 
 //devuelve las ordenes del usuario
