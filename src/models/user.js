@@ -83,6 +83,11 @@ const User =  mongoose.Schema({
         }
     ],
 
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
+
     fdn: {type: Date}
     
 });

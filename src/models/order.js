@@ -57,6 +57,21 @@ const Order = mongoose.Schema({
                 required: [true, 'El id es obligartorio']
             },
 
+            name: {
+                type: String,
+                required: [true, "El name es obligartorio"]
+            },
+
+            brand: {
+                type: String,
+                required: [true, "La marca es obligartorio"]
+            },
+
+            img: {
+                type: String,
+                required: [true, 'La imagen es es obligatoria']
+            },
+
             description:{
                 type: String,
                 required: [true, 'La descripcion es obligatoria']

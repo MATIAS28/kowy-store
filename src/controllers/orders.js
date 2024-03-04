@@ -8,6 +8,7 @@ const saveOrder = async (order, res) => {
     products.forEach(product => {
         const item = {
             title: product.name,
+            img: product.img,
             description: product.description,
             category_id: product.category,
             quantity: product.quantity,
