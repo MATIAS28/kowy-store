@@ -20,8 +20,9 @@ function User () {
     const getUserData = async () => {
         const orders = await axios.get(URL+'orders', {headers:{'auth-token': user}})
         const userData = await axios.get(URL+'user', {headers:{'auth-token': user}})
+        console.log(orders);
         
-        setUserData({orders: orders.data, user: userData.data.user})
+        setUserData({orders: orders.data.orders, user: userData.data.user})
     }
 
     useEffect(() => {
@@ -38,7 +39,7 @@ function User () {
         } catch (e) {
             console.log(e)
         }
-    },[userData])
+    },[user, userData])
 
     if(Object.keys(userData).length == 0){
         return <Loader/>
@@ -49,12 +50,14 @@ function User () {
         <Profile userData={userData} setSectionSelector={setSectionSelector} 
         sectionSelector={sectionSelector}/>
 
-        <div className="flex w-full p-0  w-full h-screen overflow-y-auto">
-            {sectionSelector ? <div id="user-data" className="">        
+        <div className="flex w-full p-0 w-full md:h-screen">
+            {sectionSelector ? 
+            
+            <div id="user-data" className="w-full h-4/5">        
                 <Orders orders={userData.orders}/>
             </div>
                 :
-            <div className="rounded h-4/5 bg-gray-100 w-full h-screen md:overflow-y-auto p-2">
+            <div className="rounded h-4/5 bg-gray-100 w-full md:h-screen md:overflow-y-auto p-2">
                 <ShippingInfoComponent userPage={true} token={user} getUserData={getUserData}/> 
                 <div>
                 <Addresses userData={userData}/>

@@ -14,7 +14,7 @@ import User from "./routes/user";
 function AppRoutes(){
     const routes = useRoutes([
         {path:'/',element:<Home/>},
-        {path: '/products/:cat', element: <Products/>},
+        {path: '/products', element: <Products/>},
         {path:'/product/:id',element:<ProductRoute/>},
         {path: '/login', element:<Login/>},
         {path: '/order', element: <Order/>},

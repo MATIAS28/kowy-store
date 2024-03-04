@@ -1,10 +1,9 @@
 export const Orders = ({orders}) => {
     return(
-        <>
-        <h3 className="text-2xl font-semibold p-3">Tus pedidos</h3>
+        <div className="w-full h-full">
+        <h3 className="text-2xl font-semibold p-3 my-2">Tus pedidos</h3>
         
-        <div className={orders && orders.length > 2 ? 'grid grid-cols-1 divide-y-2 overflow-y-scroll h-[18rem]' : 'flex flex-col h-[16rem]'}>
-            
+        <div className="grid grid-cols-1 overflow-y-auto h-full space-y-3 p-2">
             {/*No hay ordenes*/}
 
             {orders.length === 0 && 
@@ -21,32 +20,66 @@ export const Orders = ({orders}) => {
             {orders && orders.length > 0 && orders.map((order, i) => {
             let date = new Date(order.createdAt)
             return (
-            <div key={i} id="orders-container" className="p-4">
+            <div key={i} className="border-2 rounded-lg bg-white">
                 <div className="w-full">
                 
-                <div id="orders-container" className="flex justify-between items-center w-full rounded mb-2 bg-yellow-200 p-3">
-                    <div id="orders-container" className="flex items-center">
-                    <h3 className="text-sm font-semibold mr-7">Orden <p className="text-gray-500">#{order._id} </p></h3>
-                    <dd className="text-sm font-semibold mr-7">Fecha de compra <p className="text-gray-500 font-semibold">{date.toLocaleDateString()}</p> </dd>
-                    <dd className="text-sm font-semibold mr-7">Total <p>${order.totalPrice}</p></dd>
+                <div className="lg:flex justify-between items-center w-full rounded p-3 border-b">
+                    <div className="md:flex items-center space-y-3 md:space-y-0">
+                    
+                        <div className="md:mr-6">
+                            <h3 className="secondaryColor text-base font-semibold">Orden</h3>
+                            <p className="text-gray-500 text-sm">#{order._id} </p>
+                        </div>
+
+                        <div className="md:mr-6">
+                            <dd className="secondaryColor text-base font-semibold">Fecha de compra</dd>
+                            <p className="text-gray-500 text-sm">{date.toLocaleDateString()}</p>
+                        </div>
+
+                        <div className="md:mr-6">
+                            <dd className="secondaryColor text-base font-semibold">Total</dd>
+                            <p className="text-gray-500 text-sm">${order.totalPrice}</p>
+                        </div>
+
+                        <div className="flex items-center space-x-2">
+                            <dd className="secondaryColor text-sm font-semibold">Productos</dd>
+                            <dd className="text-sm"> {order.products.length}</dd>
+                        </div>
+
+                        
+
                     </div>
-                    <dd className="text-xs font-semibold">Productos {order.products.length}</dd>
+
+                    <div className={`px-4 md:px-7 py-1 md:py-2 my-2 md:my-0 rounded-3xl ${order.delivered ? 'primary' : 'secondary text-white'}`}>
+                        <h4 className="text-sm text-center">{order.delivered ? 'Enviado' : 'En proceso'}</h4>
+                    </div>
                 </div>
 
                 {/*Productos de las ordenes*/}
 
-                    <div className="px-2">
+                    <div className="p-2 md:p-3 my-3 md:my-0">
 
                         {order.products.map((product, i) => {
                         return(
-                        <div key={i} className="flex justify-between items-center w-full">
-                            <div className="flex items-center">
-                            <img className="rounded w-12 h-12 mr-4" src={product.img} alt={product.unit_price} />
-                            <p className="text-sm font-semibold mr-3">{product.name} </p>
-                            <p className="text-sm font-semibold text-gray-500 mr-3">talle:  {product.size} </p>
-                            <p className="border p-1 bg-black text-white rounded-full text-xs font-mono">X{product.quantity}</p>
+                        <div key={i} className="flex md:justify-between items-center w-full">
+                            <div className="flex w-full">
+                                <img className="rounded w-16 md:w-28 h-16 md:h-28 mr-2 md:mr-4" src={product.img} alt={product.unit_price} />
+                                <div className="w-full md:w-2/4">
+                                    <div className="flex justify-between items-center w-full">
+                                        <p className="text-sm font-semibold secondaryColor">{product.brand} </p>
+                                        <div className="flex items-center space-x-2 primary px-2 py-[0.2rem] md:py-1 rounded-3xl">
+                                            <p className="font-semibold text-xs">{product.size} </p>
+                                            <p className="font-semibold text-xs">
+                                                X{product.quantity}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <p className="text-base md:text-lg font-medium">{product.name} </p>
+                                    <p className="text-xs font-medium hidden md:block">{product.description} </p>
+                                    <p className="text-sm md:text-sm font-semibold block md:hidden">${product.unit_price}</p>
+                                </div>
                             </div>
-                            <p className="text-xs font-semibold">${product.unit_price}</p>
+                            <p className="text-xs md:text-sm font-semibold hidden md:block">${product.unit_price}</p>
                         </div>
                         )
                         })}
@@ -57,6 +90,6 @@ export const Orders = ({orders}) => {
             )
             })}
         </div>
-        </>
+        </div>
     )
 }

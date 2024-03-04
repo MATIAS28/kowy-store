@@ -9,6 +9,7 @@ export const addProduct = (dispatch, p, size, cart) => {
         unit_price: p.price,
         quantity: 1
     }
+
     let products = []
 
     const find = cart.find((item) => p._id === item._id && item.size === size)

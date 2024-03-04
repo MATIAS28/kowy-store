@@ -10,6 +10,25 @@ export const getProduct = async (id) => {
     }
 }
 
+export const getFilters = async () => {
+    try {
+        const filters = await axios.get(URL+'filters')
+        return filters.data
+    } catch (e) {
+        throw e
+    }
+}
+
+export const getAllProducts = async (filters) => {
+    try {
+        const products = await axios.post(URL+'products', filters)
+        return products.data
+    } catch (e) {
+        throw e
+    }
+}
+
+
 export const getProductsByCategory = async (category, limit) => {
     try {
         const products = await axios.get(URL+'products/'+limit+'/'+category)
@@ -20,7 +39,6 @@ export const getProductsByCategory = async (category, limit) => {
 }
  
 export const searchProduct = async (search) => {
-    console.log(search);
     try {
         const products = await axios.post(URL+'search-product', {name: search})
         return products.data

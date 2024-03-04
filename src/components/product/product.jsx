@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 const Product = ({img, brand, name, price, id}) => {
     return(
-       <article className="rounded-lg bg-white p-0">
+       <article className="rounded-lg bg-white p-0 w-full">
         <div className="rounded-t-lg border p-2">
             <div className="rounded-t-lg p-0">
                 <img className="h-60 w-full rounded-lg" src={img}/>

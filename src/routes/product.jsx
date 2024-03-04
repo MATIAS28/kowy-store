@@ -66,10 +66,10 @@ function ProductRoute (){
         <Toaster position="bottom-right" reverseOrder={false}/>
     <div id='container' className="rounded md:flex flex-row">
         <div className="flex justify-center basis-4/5">
-            <img id='product-img' className="w-full h-80 md:h-[40rem] rounded-l" src={imgPreview} alt="" />
+            <img id='product-img' className="w-full h-80 md:h-[40rem]" src={imgPreview} alt="" />
         </div>
 
-        <div className='block md:hidden mx-5'>
+        <div className='block md:hidden mx-2 md:mx-5'>
             <ul className="grid grid-cols-4 gap-3 my-5">
             {product && product.imgs.map((img, i) => {
                 return(
@@ -81,7 +81,7 @@ function ProductRoute (){
             </ul>
         </div>
 
-        <div className="m-5 basis-2/5">
+        <div className="m-2 md:m-5 basis-2/5">
             <h3 className='my-2 text-sm font-medium secondaryColor'>{product.brand}</h3>
             <h1 className="text-4xl font-bold m-0 p-0">{product.name}</h1>
             <div className="my-4 items-center">

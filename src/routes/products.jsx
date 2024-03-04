@@ -1,36 +1,104 @@
-import { useParams } from "react-router-dom"
 import Filters from "../components/products/filters"
-import ProductsComponent from "../components/products/products"
+import { useEffect, useState } from "react"
+import { getAllProducts } from "../services/products"
+import Product from "../components/product/product"
+import Loader from "../components/loader"
+import {ExclamationTriangleIcon, FunnelIcon} from '@heroicons/react/24/solid'
 
 function Products (){
-    const {cat} = useParams()
-    return(
-        <>
-        <div className="w-full p-4 mt-5">
-            <h1 className="text-5xl text-semibold">{cat.toUpperCase()+'S'}</h1>
-        </div>
-        <div id="container">
-            
-            <div id="filter" className="w-full">
-                <Filters/>
-            </div>
+    const [products, setProducts] = useState()
+    const [isLoaded, setIsLoaded] = useState(null)
+    const [error, setError] = useState(null)
+    const [showFiltersMobile, setShowFiltersMobile] = useState(false)
+    const [filters, setFilters] = useState(
+        {
+            category: [],
+            brand: []
+        }
+    )
 
-            <div className="basis-3/4">
-                <ProductsComponent/>
-            </div>
-        </div>
-
-        <style jsx="true">
-        {`
-            @media(max-width: 768px){
-                #container{
-                    flex-direction: column;
-                }
+    const getProducts = async () => {
+        try {
+            const Products = await getAllProducts(filters)
+            if (Products.length === 0) setError(true)
+            setProducts(Products)
+            setIsLoaded(true)
+        } catch (e) {
+            if(e.response && e.response.status === 404){
+                setError(404)
             }
-        `}
-        </style>
+        }
+    }
 
-        </>
+    useEffect(() => {
+        setIsLoaded(false)
+        setError(false)
+        setProducts() 
+        getProducts()  
+    }, [filters])
+
+
+    if (showFiltersMobile) {
+        return <Filters filters={filters} setFilters={setFilters} setShowFiltersMobile={setShowFiltersMobile}/>
+    }
+
+    return(
+    <div className="block w-full p-2">
+        <div className="flex justify-center ip-5 my-7">
+            <div>
+            <h2 className="text-center text-3xl md:text-4xl text-bold">Catalogo</h2>
+            <h3 className="text-center text-sm md:text-lg text-gray-500">
+                Descubre el estilo que te define en nuestro catálogo 
+            </h3>
+            </div>
+        </div>
+
+        <div className="md:flex my-12 md:p-0 lg:mx-4">
+
+            <div className="flex md:hidden justify-between items-center w-full my-4">
+                <button onClick={() => setShowFiltersMobile(true)}
+                className="flex items-center secondary py-1 px-5 text-lg rounded-lg">
+                    <span className="text-white mr-2">Filtrar</span>
+                    <FunnelIcon className="w-5 h-5 fill-white"/>
+                </button>
+
+                <button className="primary font-semibold py-1 px-5 rounded-lg">
+                    <span className="text-lg mr-2">Nuevo</span>
+                </button>
+            </div>
+
+            <div className="hidden md:flex w-2/5 lg:w-1/3 h-full">
+                <Filters filters={filters} setFilters={setFilters}/>
+            </div>
+
+            <div className={`${products && products.length > 0 ? '' : 'hidden'} w-full`}>
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+                {products && products.length > 0 && products.map((product, i) => {
+                    return <Product key={i} img={product.imgs[0].url} brand={product.brand} name={product.name} price={product.price} id={product._id} />
+                })}
+
+                </div>
+            </div>
+
+            {error && 
+                <div className="flex justify-center items-center w-full my-12 animate-pulse">
+                    <div >
+                    <div className="flex justify-center items-center">
+                    <ExclamationTriangleIcon className="w-16 h-16 fill-gray-400"/>
+                    </div>
+                    <h3 className="text-center text-bold text-2xl text-gray-400">No se encontraron productos</h3>
+                    </div>
+                </div>
+            }
+
+            {!isLoaded && !error &&
+            <div className="w-full">
+                <Loader/>
+            </div>
+            }
+
+        </div>
+     </div>
     )
 }
 

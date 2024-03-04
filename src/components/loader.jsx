@@ -1,19 +1,18 @@
 const Loader = () => {
  return(
-    <div id="loader-container" className="min-h-screen flex justify-center items-center p-1">
-        <div className="loader"></div>
+    <div id="loader-container" className="h-screen w-full flex justify-center items-center">
+        <div className="loader animate-spin h-full flex justify-center items-center h-screen"></div>
 
         <style jsx="true">
         {`
         #loader-container{
-         height: 100%;
          position: relative;
          z-index: -1;
         }
 
         .loader {
          border: 10px solid transparent;
-         border-top: 10px solid rgb(31 41 55);
+         border-top: 10px solid #EAEB46;
          border-radius: 50%;
          width: 80px;
          height: 80px;
