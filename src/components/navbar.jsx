@@ -38,8 +38,8 @@ export const NavbarComponent = () => {
                     </div>
                 </Link>
                 
-                <Link href="/productos" className="flex items-center w-full">
-                    <div className={`w-1 h-5 rounded-r-lg ${route === "/productos" ? "primary" : "bg-transparent"}`} ></div>
+                <Link href="/products" className="flex items-center w-full">
+                    <div className={`w-1 h-5 rounded-r-lg ${route === "/products" ? "primary" : "bg-transparent"}`} ></div>
                     <div className="flex justify-center w-full">
                         <div className="flex items-center mx-auto w-3/5">
                             <ShoppingCartIcon className="w-7 h-7 fill-white mr-1"/>

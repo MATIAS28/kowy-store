@@ -37,7 +37,7 @@ export const BestSellersComponent = () => {
                 {bestSellers && bestSellers.length > 0 &&
                     bestSellers.map((product, i) => {
                         return(
-                    <Link href={product._id} className="flex justify-between items-center w-full hover:bg-white/25 rounded-lg p-2">
+                    <Link key={i} href={product._id} className="flex justify-between items-center w-full hover:bg-white/25 rounded-lg p-2">
                     <div className="flex items-center uppercase">
                         <img className="w-12 h-12 rounded" src={product?.img} alt="zapas"/>
 

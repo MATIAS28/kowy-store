@@ -9,7 +9,6 @@ export const PendingOrdersComponent = () => {
     const getOrders = async () => {
         try {
             const PendingOrders = await getPendingOrders()
-            console.log(PendingOrders)
             setPendingOrders(PendingOrders)
         } catch (e) {
             console.error(e)

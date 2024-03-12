@@ -10,7 +10,6 @@ export const StatisticsComponent = () => {
     const getStatistics = async () => {
         try {
             const Statistics = await getGeneralStatistics(days)
-            console.log(Statistics);
             setStatistics(Statistics)
         } catch (e) {
             console.log(e);
