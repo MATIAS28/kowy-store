@@ -17,16 +17,6 @@ const Product = mongoose.Schema({
         required: [true, 'Introduce el precio']
     },
 
-    weight: {
-        type: Number,
-        required: [true, 'Introduce el peso']
-    },
-
-    height: {
-        type: Number,
-        required: [true, 'Introduce el alto']
-    },
-
     sizes: [{
         size:{
             type: String
@@ -36,18 +26,6 @@ const Product = mongoose.Schema({
             default: 0
         }
     }],
-
-    stock:[
-        {
-            color: {
-                type: String
-            },
-
-            quantity: {
-                type: Number
-            }
-        }
-    ],
 
     category: {
         type: String,
@@ -92,6 +70,11 @@ const Product = mongoose.Schema({
     available:{
         type: Boolean,
         default: true
+    },
+
+    discount: {
+        type: Number,
+        default: 0
     }
     
 })

@@ -1,14 +1,15 @@
 const cloudinary = require('cloudinary');
+const fs = require('fs-extra');
 
- async function uploadImages(img){
-    return await cloudinary.v2.uploader.upload(img, {folder: 'uploads'})
-    .then(result => {
-        var objImg = {
-            public_id: result.public_id,
-            url: result.secure_url
+async function imgsUploader (file, folder){
+    return await cloudinary.v2.uploader.upload(file, {resource_type: "auto", folder: folder}).then(data => {
+        const URI = {
+            public_id: data.public_id,
+            url: data.secure_url
         }
-        return objImg
-    })
+        fs.unlinkSync(file)
+        return URI
+    }).catch(e => console.error(e))
 }
 
 async function deleteImages(publicId){
@@ -16,6 +17,6 @@ async function deleteImages(publicId){
 }
 
 module.exports = {
-    uploadImages, 
+    imgsUploader, 
     deleteImages
 };
