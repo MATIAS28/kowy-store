@@ -4,6 +4,7 @@ import { ProductCardComponent } from "@/components/product/productCard"
 import { ProductLoaderComponent } from "@/components/productLoader"
 import { getAllProducts, searchProduct } from "@/services/productsService"
 import { CheckCircleIcon, ExclamationCircleIcon, MagnifyingGlassIcon, PlusIcon } from "@heroicons/react/24/solid"
+import Link from "next/link"
 import { useEffect, useState } from "react"
 
 
@@ -87,9 +88,9 @@ export default function ProductsPage (){
 
         <div className="grid grid-cols-3 gap-6">
 
-            <div className="flex justify-center w-80  items-center bg-white/25 hover:bg-white/50 rounded-lg cursor-pointer w-80">
+            <Link href={'/products/create-product'} className="flex justify-center w-80  items-center bg-white/25 hover:bg-white/50 rounded-lg cursor-pointer w-80">
             <PlusIcon className="w-28 h-12 fill-white"/>
-            </div>
+            </Link>
 
             {error && <ErrorComponent name={'productos'}/>}
 
@@ -98,7 +99,7 @@ export default function ProductsPage (){
             {products && products.length > 0 && !error &&
             products.map((product, i) => {
                 return(
-                    <ProductCardComponent id={product._id} img={product.imgs[0].url} 
+                    <ProductCardComponent id={product._id} img={product.imgs[0]?.url} 
                     brand={product.brand} name={product.name} price={product.price} key={i}/>
                 )
             })}
