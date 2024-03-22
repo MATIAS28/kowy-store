@@ -131,37 +131,27 @@ async function updateOrderStatus(req, res){
 //--------Products---------
 
 async function createProduct (req, res){
-    
     var {...products} = req.body;
-    products.sizes = products.sizes.map((size) => JSON.parse(size))
-    const newProduct = new Products(products);
-    const arrayImgs = req.files && req.files.imgs ? req.files.imgs : null;
-
-    console.log(products);
-
-    if(!arrayImgs) return res.status(500).send({message: 'La imagen es obligatoria'})
+    products.sizes = products.sizes ? JSON.parse(products.sizes[0]) : null
+    const newProduct = new Products(products)
+    const imgs = req.files?.imgs
+    
     if(!req.files) return res.status(500).send({message: 'La imagen es obligatoria'});
     
     try {
-        if (arrayImgs.length > 1) {
-            for (const img of arrayImgs) {
-                const imgOBJ = await imgsUploader(img.tempFilePath)
+        if (Array.isArray(imgs)) {
+            for (const img of imgs) {
+                const imgOBJ = await imgsUploader(img.tempFilePath, newProduct.category)
                 newProduct.imgs.push(imgOBJ)
-                await fs.unlink(img.tempFilePath)
             }
         }else{
-            const imgOBJ = await imgsUploader(arrayImgs.tempFilePath)
+            const imgOBJ = await imgsUploader(imgs.tempFilePath, newProduct.category)
             newProduct.imgs.push(imgOBJ)
         }
 
-        newProduct.save((err, productSaved) => {
-            console.log(err);
-            if(err) return res.status(500).send({message: 'Error al guardar el producto'})
-            if(!productSaved) return res.status(404).send({message: 'Error al guardar el producto'})
-            return res.status(201).send({product: newProduct})
-        })
+        const productSaved = await newProduct.save()
+        return res.status(201).send(productSaved)
     } catch (e) {
-        console.log(e);
         res.status(404).send({message: 'Error al guardar el producto'})
     }
 }
@@ -176,7 +166,7 @@ function deleteProduct(req, res) {
                 await deleteImages(img.public_id)
             }
 
-            return res.status(200).send({product_deleted: productDeleted})
+            return res.status(200).send('Producto eliminado correctamente')
         })
 
     } catch (e) {
@@ -185,15 +175,53 @@ function deleteProduct(req, res) {
 
 }
 
-function updateProduct(req, res){
-    const {...productUpdate} = req.body;
+async function updateProduct(req, res){
+    let productUpdate = {}
+    const imgs = req.files?.imgs
+    const imgsDeleted = JSON.parse(req.body.imgsDeleted)
     
-    Products.findOneAndUpdate(req.params.id, productUpdate, {new: true}, (e, productUpdated) => {
-        if(e) return res.status(500).send({message: 'Error al actualizar el producto'})
-        if(!productUpdated) return res.status(404).send({message: 'El Producto no existe'})
-        console.log(productUpdated);
-        return res.status(200).send({product_updated: productUpdated})
-    })
+    for (const key in req.body) {
+        if (key == "imgsDeleted") {
+            continue
+        }
+        productUpdate = {...productUpdate, [key]: JSON.parse(req.body[key])}
+    }
+
+    if (imgs && Array.isArray(imgs)) {
+        for (const img of imgs) {
+            const imgOBJ = await imgsUploader(img.tempFilePath, productUpdate.category)
+            productUpdate.imgs.push(imgOBJ)
+        }
+    }
+    
+    if (imgs && !Array.isArray(imgs)) {
+        const imgOBJ = await imgsUploader(imgs.tempFilePath, productUpdate.category)
+        productUpdate.imgs.push(imgOBJ)
+    }
+
+    try {
+        if (imgsDeleted.length > 0) {
+            for(let img of imgsDeleted){
+                await deleteImages(img.public_id)
+            }
+        }
+        const productUpdated = await Products.findByIdAndUpdate(req.params.id, productUpdate, {new: true})
+        return res.status(201).send(productUpdated)
+    } catch (e) {
+        console.log(e);
+        return res.status(500).send('Error updating product')
+    }
+}
+
+async function updateProductStatus(req, res){
+    const {id, status} =  req.params
+
+    try {
+        const productUpdated =  await Products.findByIdAndUpdate(id, {available: status}, {new: true})
+        return res.status(201).send(productUpdated) 
+    } catch (e) {
+        return res.status(500).send('error updating product status', e)
+    }
 }
 
 async function getAllProducts (req, res){
@@ -201,8 +229,20 @@ async function getAllProducts (req, res){
         const products = await Products.find().sort('-createdAt')
         return res.status(200).send(products)
     } catch (e) {
-        return res.status(500).send('error when returning all products') 
+        return res.status(500).send('error returning all products') 
     }
+}
+
+async function getProduct (req, res){
+   try {
+    const product = await Products.findById(req.params.id)
+    
+    if (!product) return res.status(404).send('producto no encontrado')
+    
+    return res.status(200).send(product)
+   } catch (e) {
+    return res.status(500).send('error returning product '+req.params.id) 
+   } 
 }
 
 async function searchProduct(req, res){
@@ -231,6 +271,8 @@ module.exports = {
     createProduct,
     deleteProduct,
     updateProduct,
+    updateProductStatus,
     getAllProducts,
+    getProduct,
     searchProduct
 }

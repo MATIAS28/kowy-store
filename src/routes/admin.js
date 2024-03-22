@@ -8,7 +8,9 @@ const { getGeneralStatistics, getPendingOrders,
         getBestSellers, getOrders, getOrder, 
         updateOrderStatus, getAllProducts, 
         searchProduct, createProduct,
-        deleteProduct,  updateProduct} = require('../controllers/admin');
+        deleteProduct,  updateProduct, 
+        getProduct,
+        updateProductStatus} = require('../controllers/admin');
 
 //Rutas de productos
 api.post('/product', fileUpload({
@@ -16,8 +18,16 @@ api.post('/product', fileUpload({
     tempFileDir: "./uploads",
 }), createProduct);
 
+api.get('/product/:id', getProduct)
 api.delete('/product/:id', deleteProduct)
-api.put('/update-product/:id', updateProduct)
+api.post('/update-product/:id', fileUpload({
+    useTempFiles: true,
+    tempFileDir: "./uploads",
+}), updateProduct)
+api.post('/update-status/:id/:status', updateProductStatus)
+
+api.get('/all-products', getAllProducts)
+api.post('/search-product', searchProduct)
 
 //rutas de ordenes
 api.post('/orders', getOrders)
@@ -32,8 +42,5 @@ api.get('/best-sellers', getBestSellers)
 api.get('/order/:id', getOrder)
 api.post('/update-order-status', updateOrderStatus)
 
-//Products
-api.get('/all-products', getAllProducts)
-api.post('/search-product', searchProduct)
 
 module.exports = api
