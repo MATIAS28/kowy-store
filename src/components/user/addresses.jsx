@@ -1,3 +1,6 @@
+import { ExclamationCircleIcon } from '@heroicons/react/24/solid'
+
+
 export const Addresses = ({userData}) => {
     return(
         <div className="mt-12">
