@@ -32,7 +32,7 @@ function Home(){
         
         <NewArrivalsComponent/>
 
-        <ArticleCarousel cat="Piluso" limit={4}/>
+        <ArticleCarousel cat="zapatillas" limit={4}/>
 
         </>
     )
