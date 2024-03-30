@@ -87,7 +87,7 @@ const Navbar  = ({setSearch, search}) => {
           {expandCategories != null && 
           
           <div id={!expandCategories ? 'slide-top' : 'slide-bottom'} className='categories justify-center items-center space-x-2 p-2 text-white text-lg font-base w-full border-t'>
-            <Link to='/' id='logo' className='mx-3'>
+            <Link to='/products' id='logo' className='mx-3'>
               <p>Remeras</p>
             </Link>
             <Link to='/' id='logo' className='mx-3'>
