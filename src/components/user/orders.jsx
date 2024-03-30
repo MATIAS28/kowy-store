@@ -1,3 +1,5 @@
+import { ExclamationCircleIcon } from '@heroicons/react/24/solid'
+
 export const Orders = ({orders}) => {
     return(
         <div className="w-full h-full">
