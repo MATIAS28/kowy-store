@@ -1,5 +1,5 @@
 import axios from "axios"
-const URL = import.meta.env.VITE_URL
+const URL = import.meta.env.VITE_URL || 'http://localhost:3001/api/'
 
 export const getProduct = async (id) => {
     try {
@@ -43,6 +43,6 @@ export const searchProduct = async (search) => {
         const products = await axios.post(URL+'search-product', {name: search})
         return products.data
     } catch (e) {
-        
+        throw e
     }
 }

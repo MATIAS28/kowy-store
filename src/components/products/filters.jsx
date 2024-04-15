@@ -5,6 +5,7 @@ import { XMarkIcon, XCircleIcon } from '@heroicons/react/24/solid'
 
 const Filters = ({filters, setFilters, setShowFiltersMobile}) => {
     const [filtersToShow, setFiltersToShow] = useState({})
+
     const getAllFilters = async () => {
         try {
             const Filters = await getFilters()
@@ -51,11 +52,11 @@ const Filters = ({filters, setFilters, setShowFiltersMobile}) => {
                         const isSelected = filters?.category.find((filter) => filter === category)
                         return(
                               <button key={i}  onClick={() => handlerAddFilter('category', category)}
-                              className={`text-base flex items-center secondaryColor w-fit my-1 rounded-3xl px-3 py-1
+                              className={`flex items-center secondaryColor w-fit my-1 rounded-3xl px-3 py-1
                               ${isSelected ? 
                               'text-sm primaryColor font-semibold bg-gray-300'
                               : ''}`}>
-                                  <p className="text-xl md:text-sm lg:text-base mr-2 text-start">
+                                  <p className="text-xl md:text-sm mr-2 text-start font-light uppercase">
                                       {category}
                                   </p>
                                   <XCircleIcon className={`w-4 h-4 fill-gray-500 ${isSelected ? 'block' : 'hidden'}`}/>
@@ -76,11 +77,11 @@ const Filters = ({filters, setFilters, setShowFiltersMobile}) => {
                           const isSelected = filters?.brand.find((filter) => filter === brand)
                           return(
                                 <button key={i}  onClick={() => handlerAddFilter('brand', brand)}
-                                className={`text-base flex items-center secondaryColor w-fit my-1 rounded-3xl px-3 py-1
+                                className={` flex items-center secondaryColor w-fit my-1 rounded-3xl px-3 py-1
                                 ${isSelected ? 
                                 'text-sm primaryColor font-semibold bg-gray-300'
                                 : ''}`}>
-                                    <p className="text-xl md:text-sm lg:text-base mr-2 text-start">
+                                    <p className="text-xl md:text-sm mr-2 text-start font-light uppercase">
                                         {brand}
                                     </p>
                                     <XCircleIcon className={`w-4 h-4 ${isSelected ? 'fill-gray-500' : 'fill-transparent'}`}/>
@@ -91,14 +92,32 @@ const Filters = ({filters, setFilters, setShowFiltersMobile}) => {
                     </div>
                 </div>
 
-                <div className="">
+                {filtersToShow && filtersToShow?.sizes && filtersToShow?.sizes.length > 0 &&
+                    <div className="my-6">
 
-                    <h4 className="text-2xl secondaryColor font-bold ml-3">Talle</h4>
+                    <h4 className="text-2xl secondaryColor font-bold ml-3">Talles</h4>
 
-                    <button className="flex items-center">
-                        <span></span>
-                    </button>
+                    <div className="grid grid-cols-1 w-full">
+                     {filtersToShow && filtersToShow?.sizes && 
+                         filtersToShow.sizes.map((sizes, i) => {
+                          const isSelected = filters?.sizes.find((filter) => filter === sizes)
+                          return(
+                                <button key={i}  onClick={() => handlerAddFilter('brand', sizes)}
+                                className={`text-base flex items-center secondaryColor w-fit my-1 rounded-3xl px-3 py-1
+                                ${isSelected ? 
+                                'text-sm primaryColor font-semibold bg-gray-300'
+                                : ''}`}>
+                                    <p className="text-xl md:text-sm mr-2 text-start font-light uppercase">
+                                        {sizes}
+                                    </p>
+                                    <XCircleIcon className={`w-4 h-4 ${isSelected ? 'fill-gray-500' : 'fill-transparent'}`}/>
+                                </button>
+                            )
+                         })
+                     }
+                    </div>
                 </div>
+                }
         </div>
     )
 }

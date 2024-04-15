@@ -1,4 +1,3 @@
-import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom"
 
@@ -12,14 +11,15 @@ const Error = () => {
     }, [])
 
     return(
-        <div className="mt-20 h-full">
-            <div className="flex justify-center">
-            <ExclamationCircleIcon className="w-12 h-12" fill="red"/>
-            </div>
-            <div className="text-center">
-            <h3 className="text-xl font-bold font-mono">Pagina no encontrada</h3>
-            <h4 className="text-lg text-gray-500 font-semibold">Seras redirigido a la pagina principal</h4>       
-            </div>        
+        <div className="flex justify-center items-center h-screen">
+            <div className="bg-black p-4">
+                <h1 className="text-3xl text-center font-bold text-white">·ERROR·</h1>
+                <h2 className="text-9xl text-center border-b primaryColor">404</h2>
+                <div className="text-center">
+                <h3 className="text-2xl font-light text-white">Pagina no encontrada</h3>
+                <h4 className="text-lg font-light text-white animate-pulse">Seras redirigido a la pagina principal</h4>       
+                </div>      
+            </div>      
         </div>
     )
 }

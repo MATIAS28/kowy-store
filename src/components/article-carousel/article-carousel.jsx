@@ -39,7 +39,10 @@ const ArticleCarousel = ({cat, limit}) => {
             <div id='articles' className='mx-auto grid max-w-6xl w-full grid-cols-1 gap-6 md:p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
             {isLoaded && products && !error  ? 
                 products.map((product, i) => {
-                    return <Product key={i} img={product.imgs[0].url} brand={product.brand} name={product.name} price={product.price} id={product._id} colors={product.colors} />
+                    return <Product key={i} img={product.imgs[0].url} 
+                    brand={product.brand} name={product.name} 
+                    price={product.price} id={product._id} 
+                    colors={product.colors} sizes={product.sizes} />
                 })
                 :
                 <ArticlesLoader/>

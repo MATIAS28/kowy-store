@@ -8,6 +8,7 @@ import { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import {AuthContext} from '../../context/userContext/AuthContext'
 import { cartContext } from '../../context/cartContext/cartContext'
+import { getFilters } from '../../services/products'
 
 const Navbar  = ({setSearch, search}) => {
   const [expand, setExpand] = useState(false)
@@ -16,12 +17,23 @@ const Navbar  = ({setSearch, search}) => {
   const {cart, setExpandCart} =  useContext(cartContext)
   const [expandCategories, setExpandCategories] = useState(null)
   const [productsCount, setProductsCount] = useState(0)
-  
+  const [categories, setCategories] = useState({})
+    
+  const getAllFilters = async () => {
+        try {
+            const Filters = await getFilters()
+            setCategories(Filters.categories)
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
   useEffect(() => {
     let suma = 0
     cart.map((item) => suma += item.quantity)
     setProductsCount(suma)
     user != undefined ? setIsLoged('#EAEB46') : setIsLoged('white')
+    getAllFilters()
   }, [user, cart])
 
     return(
@@ -36,7 +48,7 @@ const Navbar  = ({setSearch, search}) => {
               <div>
               <button className='flex items-center' 
                 onClick={() => setExpandCategories(prev => !prev)}>
-                <span className='text-2xl font-semibold primaryColor mx-2'>catalogo</span>
+                <span className='text-lg font-semibold primaryColor mx-2 uppercase'>catalogo</span>
                 <ChevronUpIcon className={`w-6 h-6 primaryColor rotate-button ${expandCategories ? 'rotateDown' : ''}`}/>
               </button>
               </div>
@@ -86,16 +98,16 @@ const Navbar  = ({setSearch, search}) => {
 
           {expandCategories != null && 
           
-          <div id={!expandCategories ? 'slide-top' : 'slide-bottom'} className='categories justify-center items-center space-x-2 p-2 text-white text-lg font-base w-full border-t'>
-            <Link to='/' id='logo' className='mx-3'>
-              <p>Remeras</p>
-            </Link>
-            <Link to='/' id='logo' className='mx-3'>
-              <p>Bermudas</p>
-            </Link>
-            <Link to='/' id='logo' className='mx-3'>
-              <p>Pantalones</p>
-            </Link>
+          <div id={!expandCategories ? 'slide-top' : 'slide-bottom'} className='categories justify-center items-center space-x-2 p-2 text-white w-full font-semibold'>
+            {categories && categories.length > 0 &&
+            categories.map((category, i) => {
+              return(
+                <Link to={{pathname:'/products', search: category}} 
+                onClick={() => setExpandCategories(null)} className='duration-200 hover:border-b-2 uppercase'>
+                  {category}
+                </Link>
+              )
+            })}
           </div>  
 
           }

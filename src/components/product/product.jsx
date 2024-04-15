@@ -1,21 +1,24 @@
 import { EyeIcon, ShoppingCartIcon } from "@heroicons/react/24/solid"
 import { Link } from "react-router-dom"
 
-const Product = ({img, brand, name, price, id}) => {
+const Product = ({img, brand, name, price, id, sizes}) => {
     return(
-       <article className="rounded-lg bg-white p-0 w-full">
-        <div className="rounded-t-lg border p-2">
+       <article className="rounded-lg bg-white p-0 w-full border">
+        <div className="rounded-t-lg p-2">
             <div className="rounded-t-lg p-0">
                 <img className="h-60 w-full rounded-lg" src={img}/>
             </div>
 
             <div className="flex flex-col p-2 h-24">
                 <p className="text-xs secondaryColor font-bold italic py-1">{brand}</p>
-                <div className="w-full flex justify-between items-center space-x-2">
-                    <p className="text-base font-medium">{name}</p>
-                    <p className="text-sm font-medium">${price}</p>
-                </div>
+                <p className="text-sm font-light my-1">{name}</p>
+                <p className="text-sm font-light">${price}</p>
             </div>
+        </div>
+
+        <div className="w-full flex justify-around items-center bg-gray-200 p-1">
+            {sizes && sizes.length &&
+            sizes.map((size, i) => <span className="text-xs uppercase font-light">{size.size}</span> )}
         </div>
 
         <Link to={'/product/'+id} >

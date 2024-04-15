@@ -4,15 +4,17 @@ import { getAllProducts } from "../services/products"
 import Product from "../components/product/product"
 import Loader from "../components/loader"
 import {ExclamationTriangleIcon, FunnelIcon} from '@heroicons/react/24/solid'
+import { useLocation } from "react-router-dom"
 
-function Products (){
+function Products ({params}){
+    const location = useLocation()
     const [products, setProducts] = useState()
     const [isLoaded, setIsLoaded] = useState(null)
     const [error, setError] = useState(null)
     const [showFiltersMobile, setShowFiltersMobile] = useState(false)
     const [filters, setFilters] = useState(
         {
-            category: [],
+            category: [location.search.slice(1)],
             brand: []
         }
     )
@@ -37,9 +39,9 @@ function Products (){
         getProducts()  
     }, [filters])
 
-
     if (showFiltersMobile) {
-        return <Filters filters={filters} setFilters={setFilters} setShowFiltersMobile={setShowFiltersMobile}/>
+        return <Filters filters={filters} setFilters={setFilters} 
+        setShowFiltersMobile={setShowFiltersMobile}/>
     }
 
     return(
@@ -53,7 +55,7 @@ function Products (){
             </div>
         </div>
 
-        <div className="md:flex my-12 md:p-0 lg:mx-4">
+        <div className="md:flex justify-around my-12">
 
             <div className="flex md:hidden justify-between items-center w-full my-4">
                 <button onClick={() => setShowFiltersMobile(true)}
@@ -67,14 +69,15 @@ function Products (){
                 </button>
             </div>
 
-            <div className="hidden md:flex w-2/5 lg:w-1/3 h-full">
+            <div className="hidden md:flex w-2/5 lg:w-fit h-full mx-7">
                 <Filters filters={filters} setFilters={setFilters}/>
             </div>
 
             <div className={`${products && products.length > 0 ? '' : 'hidden'} w-full`}>
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 px-0 md:px-4">
                 {products && products.length > 0 && products.map((product, i) => {
-                    return <Product key={i} img={product.imgs[0].url} brand={product.brand} name={product.name} price={product.price} id={product._id} />
+                    return <Product key={i} img={product.imgs[0].url} brand={product.brand} 
+                            name={product.name} price={product.price} id={product._id} sizes={product.sizes}/>
                 })}
 
                 </div>

@@ -6,6 +6,7 @@ import { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import {AuthContext} from '../../context/userContext/AuthContext'
 import { cartContext } from '../../context/cartContext/cartContext'
+import { getFilters } from '../../services/products'
 
 
 export const MobileNavbar = ({setSearch, search}) => {
@@ -15,12 +16,24 @@ export const MobileNavbar = ({setSearch, search}) => {
     const {cart, expandCart, setExpandCart} =  useContext(cartContext)
     const [expandCategories, setExpandCategories] = useState(null)
     const [productsCount, setProductsCount] = useState(0)
+    const [categories, setCategories] = useState({})
+
+
+    const getAllFilters = async () => {
+      try {
+          const Filters = await getFilters()
+          setCategories(Filters.categories)
+      } catch (e) {
+          console.log(e);
+      }
+  }
     
     useEffect(() => {
       let suma = 0
       cart.map((item) => suma += item.quantity)
       setProductsCount(suma)
       user != undefined ? setIsLoged('#EAEB46') : setIsLoged('white')
+      getAllFilters()
     }, [user, cart])
   
     return(
@@ -79,18 +92,19 @@ export const MobileNavbar = ({setSearch, search}) => {
                         <XMarkIcon className='w-6 h-6'/>
                     </button>
                 </div>
+          
+                <div className='flex flex-col space-y-1 text-white w-full font-light my-4'>
+                  {categories && categories.length > 0 &&
+                  categories.map((category, i) => {
+                    return(
+                      <Link to={{pathname:'/products', search: category}} 
+                      onClick={() => setExpandCategories(null)} className='duration-200 text-lg hover:border-b-2 uppercase'>
+                        {category}
+                      </Link>
+                    )
+                  })}
+                </div>  
 
-                <div>
-                    <Link to='/' id='logo' className='mx-3'>
-                    <p>Remeras</p>
-                    </Link>
-                    <Link to='/' id='logo' className='mx-3'>
-                    <p>Bermudas</p>
-                    </Link>
-                    <Link to='/' id='logo' className='mx-3'>
-                    <p>Pantalones</p>
-                    </Link>
-                </div>
             </div>
           </div>  
 
