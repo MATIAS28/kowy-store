@@ -98,6 +98,7 @@ const Navbar  = ({setSearch, search}) => {
 
           {expandCategories != null && 
           
+<<<<<<< HEAD
           <div id={!expandCategories ? 'slide-top' : 'slide-bottom'} className='categories justify-center items-center space-x-2 p-2 text-white w-full font-semibold'>
             {categories && categories.length > 0 &&
             categories.map((category, i) => {
@@ -108,6 +109,18 @@ const Navbar  = ({setSearch, search}) => {
                 </Link>
               )
             })}
+=======
+          <div id={!expandCategories ? 'slide-top' : 'slide-bottom'} className='categories justify-center items-center space-x-2 p-2 text-white text-lg font-base w-full border-t'>
+            <Link to='/products' id='logo' className='mx-3'>
+              <p>Remeras</p>
+            </Link>
+            <Link to='/' id='logo' className='mx-3'>
+              <p>Bermudas</p>
+            </Link>
+            <Link to='/' id='logo' className='mx-3'>
+              <p>Pantalones</p>
+            </Link>
+>>>>>>> 3ebbdaa0a662c094fd9048a60e3a4d1bcdd06b22
           </div>  
 
           }
