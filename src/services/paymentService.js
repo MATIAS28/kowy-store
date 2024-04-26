@@ -39,6 +39,8 @@ async function validatePaymentService (id){
       order.paid = true
     }
 
+    console.log(order);
+
     return {paymentInfo: order}
   } catch (e) {
     console.log(e);

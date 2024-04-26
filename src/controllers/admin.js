@@ -259,20 +259,94 @@ async function searchProduct(req, res){
     }
 }
 
+//Users
+async function getAllUsers(req, res){
+    const {clients} = req.params
+
+    try {
+        if (clients === 'true') {
+            let users = await Users.find({oreders: {$gt: [{$size: 'oreders'}, 0]}})
+            console.log(users);
+            return res.status(200).send(users)
+        }else{
+            let users = await Users.find().sort('-createdAt')
+            return res.status(200).send(users)
+        }
+    } catch (e) {
+        return res.status(500).send({message: 'Error al devolver los usuarios'})
+    }
+}
+
+async function getUser(req, res){
+    const {id} = req.params
+
+    try {
+        const user = await Users.findById(id)
+        return res.status(200).send(user)
+    } catch (e) {
+        return res.status(500).send({message: 'Error al devolver el usuarios'})
+    }
+}
+
+async function searchUser(req, res){
+    const {id} = req.params
+
+    try {
+        const user = await Users.findById(id)
+        if (user == null) return res.status(404).send('usuario no encontrado')
+        return res.status(200).send(user)
+    } catch (e) {
+        return res.status(500).send({message: 'Error al devolver el usuarios'})
+    }
+}
+
+async function getUserOrders(req, res){
+    const {id} = req.params
+
+    try {
+        const orders = await Orders.find({user: id}).sort('-createdAt')
+        return res.status(200).send(orders)
+    } catch (e) {
+        console.log(e);
+        return res.status(500).send({message: 'Error al devolver las ordenes'})
+    }
+}
+
+async function deleteUser(req, res){
+    const {id} = req.params
+
+    try {
+        const userDeleted = await Users.findByIdAndDelete(id)
+        return res.status(200).send(userDeleted)
+    } catch (e) {
+        return res.status(500).send({message: 'Error al eliminar el usuario'})
+    }
+}
+
 module.exports = {
+    //Statistics
     getGeneralStatistics,
     getPendingOrders,
     getBestSellers,
 
+    //Orders
     getOrders,
     getOrder,
     updateOrderStatus,
 
+    //Products
     createProduct,
     deleteProduct,
     updateProduct,
     updateProductStatus,
     getAllProducts,
     getProduct,
-    searchProduct
+    searchProduct,
+
+    //Users
+    getAllUsers,
+    getUser,
+    searchUser,
+    getUserOrders,
+    deleteUser
 }

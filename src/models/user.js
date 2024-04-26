@@ -28,7 +28,15 @@ const User =  mongoose.Schema({
         minLength: [8, 'La contraseña debe contener 8 o mas caracteres']
     },
 
-    oreders: {type: Array},
+    orders: {
+        type: Number,
+        default: 0
+    },
+
+    totalSpent: {
+        type: Number,
+        default: 0
+    },
 
     addresses: [
         {

@@ -1,43 +1,32 @@
 const Order = require('../models/order')
 const { paymentService, validatePaymentService } = require("../services/paymentService")
 
-//Guarda la orden en la base de datos
-const saveOrder = async (order, res) => {
-    const products = order.products
-    const items = []
-    products.forEach(product => {
-        const item = {
-            title: product.name,
-            img: product.img,
-            description: product.description,
-            category_id: product.category,
-            quantity: product.quantity,
-            unit_price: product.unit_price
-          }
-        
-        items.push(item)
-    })
-
-    await order.save(async (e, orderSaved) => {
-        console.log(e);
-        if(e) return res.status(500).send({message: 'Error al guardar la orden'})
-        if(!orderSaved) return res.status(404).send({message: 'No fue posible guardar la orden'})
-
-        const paymentURL = await paymentService(items, orderSaved._id)
-        
-        return res.status(201).send(paymentURL)
-    })
-}
-
 //Crear una nueva orden
 async function createNewOrder(req, res){
     let {...newOrder} = req.body
     let order = new Order(newOrder)
     order.user = req.user.sub
-    const orderId = req.params.id
+    const items = []
 
     try {
-    await saveOrder(order, res)
+        order.products.forEach(product => {
+            const item = {
+                title: product.name,
+                img: product.img,
+                description: product.description,
+                category_id: product.category,
+                quantity: product.quantity,
+                unit_price: product.unit_price
+              }
+            
+            items.push(item)
+        })
+    
+        const orderSaved = await order.save()
+
+        const paymentURL = await paymentService(items, orderSaved._id)
+            
+        return res.status(201).send(paymentURL)
     } catch (e) {
         return res.status(404).send({message: 'Error al guardar la orden'})
     }

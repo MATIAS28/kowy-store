@@ -33,7 +33,7 @@ async function getAllProducts(req, res){
             query.brand = { $in: brand };
         }
 
-        const products = await Product.find(query)
+        const products = await Product.find({...query, available: true})
         return res.status(200).send(products)
     } catch (e) {
         return res.status(500).send({message: 'Error al devolver los productos'})
@@ -45,7 +45,7 @@ async function getProducts(req, res){
     const limit = req.params.limit === 'undefined' ? 0  : req.params.limit
 
     try {
-        const products = await Product.find({category: category}).limit(limit)
+        const products = await Product.find({category: category, available: true}).limit(limit)
         
         if(!products || products.length === 0) {
         return res.status(404).send({message: 'No se encontraron productos'})
@@ -63,9 +63,31 @@ function getProduct(req, res){
     Product.findById(id, (e, product) => {
         if(e) return res.status(500).send({message: 'Error al devolver el producto'})
         if(!product) return res.status(404).send({message: 'El producto no existe'})
+        if (!product.available)  return res.status(404).send({message: 'Producto no desponible'})
 
         return res.status(200).send({product: product})
     })
+}
+
+async function getNewArrivals (req, res){
+    const { limit } = req.params
+    const date = new Date()
+    date.setDate(date.getDate() - 14)
+    
+    try {
+        const newProducts = await Product.find({ createdAt: { $gte: date }, available: true })
+        .sort({ createdAt: -1 }).limit(limit)
+        
+        if(newProducts.length == 0){
+            let latestProducts = await Product.find({available: true}).limit(limit)
+            return res.status(200).send(latestProducts)
+        }
+
+        return res.status(200).send(newProducts)
+    } catch (e) {
+        return res.status(500).send({message: 'Error al devolver los productos'})
+    }
+
 }
 
 async function searchProduct(req, res){
@@ -87,6 +109,7 @@ module.exports = {
     getProduct,
     getProducts,
     getAllProducts,
+    getNewArrivals,
     getFilters,
     searchProduct
 }

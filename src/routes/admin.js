@@ -9,8 +9,11 @@ const { getGeneralStatistics, getPendingOrders,
         updateOrderStatus, getAllProducts, 
         searchProduct, createProduct,
         deleteProduct,  updateProduct, 
-        getProduct,
-        updateProductStatus} = require('../controllers/admin');
+        getProduct, updateProductStatus,
+        getAllUsers, searchUser,
+        getUser,
+        getUserOrders,
+        deleteUser} = require('../controllers/admin');
 
 //Rutas de productos
 api.post('/product', fileUpload({
@@ -42,5 +45,12 @@ api.get('/best-sellers', getBestSellers)
 api.get('/order/:id', getOrder)
 api.post('/update-order-status', updateOrderStatus)
 
+
+//Users
+api.get('/users/:clients', getAllUsers)
+api.get('/user/:id', getUser)
+api.get('/search-user/:id', searchUser)
+api.get('/user-orders/:id', getUserOrders)
+api.delete('/user/:id', deleteUser)
 
 module.exports = api

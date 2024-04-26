@@ -36,5 +36,5 @@ app.use('/api/admin', AdminRoutes);
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
-    console.log('escuchando en el puerto 3000');
+    console.log('escuchando en el puerto '+port);
 });
