@@ -1,21 +1,22 @@
 import Filters from "../components/products/filters"
 import { useEffect, useState } from "react"
-import { getAllProducts } from "../services/products"
+import { getAllProducts, getNewArrivals } from "../services/products"
 import Product from "../components/product/product"
 import Loader from "../components/loader"
 import {ExclamationTriangleIcon, FunnelIcon} from '@heroicons/react/24/solid'
 import { useLocation } from "react-router-dom"
+import { NotFoundComponent } from "../components/notFound"
 
 function Products ({params}){
-    const location = useLocation()
+    const location = useLocation().search.slice(1)
     const [products, setProducts] = useState()
     const [isLoaded, setIsLoaded] = useState(null)
     const [error, setError] = useState(null)
     const [showFiltersMobile, setShowFiltersMobile] = useState(false)
     const [filters, setFilters] = useState(
         {
-            category: [location.search.slice(1)],
-            brand: []
+            category: [location],
+            brand: [],
         }
     )
 
@@ -32,18 +33,35 @@ function Products ({params}){
         }
     }
 
+    const handlerNewArrivals = async () => {
+        try {
+            const newArrivals = await getNewArrivals()
+            if (newArrivals.length === 0) setError(true)
+            setProducts(newArrivals)
+            setIsLoaded(true)
+        } catch (e) {
+            console.log(e);
+        }
+    } 
+
     useEffect(() => {
         setIsLoaded(false)
         setError(false)
         setProducts() 
-        getProducts()  
+        
+        if (filters.category.includes('new-arrivals')) {
+            handlerNewArrivals()
+        }else{
+            getProducts() 
+        }
+        
     }, [filters])
 
     if (showFiltersMobile) {
         return <Filters filters={filters} setFilters={setFilters} 
         setShowFiltersMobile={setShowFiltersMobile}/>
     }
-
+    
     return(
     <div className="block w-full p-2">
         <div className="flex justify-center ip-5 my-7">
@@ -69,29 +87,21 @@ function Products ({params}){
                 </button>
             </div>
 
-            <div className="hidden md:flex w-2/5 lg:w-fit h-full mx-7">
+            <div className="hidden md:flex w-2/5 lg:w-1/4 h-full mx-7">
                 <Filters filters={filters} setFilters={setFilters}/>
             </div>
 
             <div className={`${products && products.length > 0 ? '' : 'hidden'} w-full`}>
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 px-0 md:px-4">
                 {products && products.length > 0 && products.map((product, i) => {
-                    return <Product key={i} img={product.imgs[0].url} brand={product.brand} 
-                            name={product.name} price={product.price} id={product._id} sizes={product.sizes}/>
+                    return <Product key={i} product={product}/>
                 })}
 
                 </div>
             </div>
 
             {error && 
-                <div className="flex justify-center items-center w-full my-12 animate-pulse">
-                    <div >
-                    <div className="flex justify-center items-center">
-                    <ExclamationTriangleIcon className="w-16 h-16 fill-gray-400"/>
-                    </div>
-                    <h3 className="text-center text-bold text-2xl text-gray-400">No se encontraron productos</h3>
-                    </div>
-                </div>
+                <NotFoundComponent name={'Productos'}/>
             }
 
             {!isLoaded && !error &&

@@ -16,7 +16,7 @@ const Error = () => {
                 <h1 className="text-3xl text-center font-bold text-white">·ERROR·</h1>
                 <h2 className="text-9xl text-center border-b primaryColor">404</h2>
                 <div className="text-center">
-                <h3 className="text-2xl font-light text-white">Pagina no encontrada</h3>
+                <h3 className="text-2xl font-light text-white">Página no encontrada</h3>
                 <h4 className="text-lg font-light text-white animate-pulse">Seras redirigido a la pagina principal</h4>       
                 </div>      
             </div>      

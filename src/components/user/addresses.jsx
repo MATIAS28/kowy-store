@@ -1,4 +1,5 @@
 import { ExclamationCircleIcon } from '@heroicons/react/24/solid'
+import { NotFoundComponent } from '../notFound'
 
 
 export const Addresses = ({userData}) => {
@@ -8,12 +9,8 @@ export const Addresses = ({userData}) => {
         
         {/*No hay direcciones*/}
 
-        {!userData.user && <div className="flex items-center justify-center w-full h-[18rem]">
-        <div className="flex flex-col items-center text-center">
-        <ExclamationCircleIcon className="w-7 h-7" fill="gray"/>
-        <p className="w-full text-lg my-2 text-gray-400 font-mono">No hay direcciones</p>
-        </div>
-        </div>}
+        {userData.user && userData.user.addresses.length == 0 && 
+        <NotFoundComponent name={'direcciones'}/>}
 
         {/*Direcciones*/}
 

@@ -71,7 +71,7 @@ export const MobileNavbar = ({setSearch, search}) => {
 
             <div className='flex items-center bg-white p-2 rounded-lg my-3'>
               <MagnifyingGlassIcon className='w-5 h-5 mx-2' fill='gray'/>
-              <input onChange={(e) => setSearch(e.target.value)} value={search} className='focus:outline-none w-full font-base' placeholder='¿Que estas buscando?' type="text"/>
+              <input onChange={(e) => setSearch(e.target.value)} value={search ? search : ''} className='focus:outline-none w-full font-base' placeholder='¿Que estas buscando?' type="text"/>
               <button className='' onClick={() => setSearch('')}>
                 <XCircleIcon className='w-5 h-5' fill='#8b0000'/>
               </button>
@@ -97,7 +97,7 @@ export const MobileNavbar = ({setSearch, search}) => {
                   {categories && categories.length > 0 &&
                   categories.map((category, i) => {
                     return(
-                      <Link to={{pathname:'/products', search: category}} 
+                      <Link key={i} to={{pathname:'/products', search: category}} 
                       onClick={() => setExpandCategories(null)} className='duration-200 text-lg hover:border-b-2 uppercase'>
                         {category}
                       </Link>

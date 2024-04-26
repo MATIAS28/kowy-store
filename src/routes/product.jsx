@@ -106,7 +106,7 @@ function ProductRoute (){
             <div className="">
                 
                 <div className='flex items-center my-4'>
-                    <button className="button-jello w-full flex items-center justify-center rounded-xl bg-black text-white font-semibold py-2 mr-3" 
+                    <button className="button-animation w-full flex items-center justify-center rounded-xl bg-black text-white font-semibold py-2 mr-3 duration-150" 
                     onClick={addProductHandler}>
                     <ShoppingBagIcon className="h-5 w-5  mr-2 "/>
                         Añadir al carrito

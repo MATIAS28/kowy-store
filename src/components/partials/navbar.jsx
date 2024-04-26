@@ -57,7 +57,7 @@ const Navbar  = ({setSearch, search}) => {
 
             <div className='flex items-center space-x-2 bg-white p-2 w-2/4 rounded-lg'>
               <MagnifyingGlassIcon className='w-5 h-5' fill='gray'/>
-              <input onChange={(e) => setSearch(e.target.value)} value={search} className='focus:outline-none w-full font-base' placeholder='¿Que estas buscando?' type="text"/>
+              <input onChange={(e) => setSearch(e.target.value)} value={search ? search : ''} className='focus:outline-none w-full font-base' placeholder='¿Que estas buscando?' type="text"/>
               <button className='' onClick={() => setSearch('')}>
                 <XCircleIcon className='w-5 h-5' fill='#8b0000'/>
               </button>
@@ -99,10 +99,16 @@ const Navbar  = ({setSearch, search}) => {
           {expandCategories != null && 
           
           <div id={!expandCategories ? 'slide-top' : 'slide-bottom'} className='categories justify-center items-center space-x-2 p-2 text-white w-full font-semibold'>
+            
+            <Link to={{pathname:'/products', search: 'new-arrivals'}} 
+            onClick={() => setExpandCategories(null)} className='duration-200 hover:border-b-2 uppercase'>
+              Nuevos ingresos
+            </Link>
+            
             {categories && categories.length > 0 &&
             categories.map((category, i) => {
               return(
-                <Link to={{pathname:'/products', search: category}} 
+                <Link key={i} to={{pathname:'/products', search: category}} 
                 onClick={() => setExpandCategories(null)} className='duration-200 hover:border-b-2 uppercase'>
                   {category}
                 </Link>

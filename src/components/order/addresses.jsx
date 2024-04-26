@@ -22,7 +22,6 @@ export const AddressesComponent = ({shippingInfo ,setShippingInfo, token}) => {
                 userAddress.forEach(address => {
                     delete address._id
                 });
-                console.log(userAddress);
                 setAddresses(userAddress)
             } catch (e) {
                 console.error(e);

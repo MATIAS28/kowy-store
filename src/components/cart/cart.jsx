@@ -46,10 +46,8 @@ function Cart(){
             </div>
 
             <div className="w-full mt-4">
-                <Link to='/order'>
-                <button className="flex justify-center items-center w-full bg-black p-2 primaryColor text-lg text-bold rounded-b">
+                <Link to='/order' className="button-animation flex justify-center items-center w-full bg-black p-2 primaryColor text-lg text-bold rounded-b">
                     Iniciar Compra
-                </button>
                 </Link>
             </div>
         </div>

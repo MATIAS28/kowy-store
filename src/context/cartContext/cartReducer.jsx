@@ -18,10 +18,16 @@ export function cartReducer(cartState, action){
                 total: 0
             }
 
+        case 'UPDATE_CART':
+            return {
+                cart: action.products,
+                total: action.total
+            }
+
         case 'REMOVE_CART':
             return{
                 cart: action.products,
-                total: action.total
+                total: action.products.length == 0 ? 0 : action.total
             }
 
         default:

@@ -28,6 +28,22 @@ export const addProduct = (dispatch, p, size, cart) => {
 
 export const removeProduct = async (cart, product, dispatch, total) => {
     const filter = await cart.filter((item) => item !== product)
-    const subtraction =   total-(product.unit_price*product.quantity)
+    const subtraction = total-(product.unit_price*product.quantity)
     dispatch({type: 'REMOVE_CART', products: filter, total: subtraction})
+}
+
+
+export const addOrRemoveProduct = async (cart, product, dispatch, update, total) => {
+    let subtraction;
+    const filter = await cart.filter((item) => item !== product)
+
+    if (update) {
+        product.quantity = product.quantity+1
+        subtraction = total+product.unit_price
+    }else{
+        product.quantity = product.quantity-1
+        subtraction = total-product.unit_price
+    }
+
+    dispatch({type: 'UPDATE_CART', products: [...filter, product], total: subtraction})
 }

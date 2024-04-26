@@ -1,5 +1,5 @@
 import axios from "axios"
-const URL = import.meta.env.VITE_URL
+const URL = import.meta.env.VITE_URL || 'http://localhost:3001/api/'
 
 export const getAddress = async (token) => {
     try {

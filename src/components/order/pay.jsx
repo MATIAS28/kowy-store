@@ -34,48 +34,48 @@ export const Pay = ({shippingInfo, token, user}) => {
 
             {/*Informacion de envio*/}
             <div id="shipping" className="w-full p-3">
-                <h3 className="text-2xl font-semibold text-white">Informacion de envio</h3>
+                <h3 className="text-2xl font-semibold ">Informacion de envio</h3>
 
                 <div className="text-lg divide-y">
                     <div className="flex justify-between w-full items-center py-3 my-2">
-                    <dt className="text-lg font-semibold text-white">Nombre</dt>
-                    <dd className="text-sm font-normal primaryColor">{shippingInfo.name+' '+shippingInfo.surname}</dd>
+                    <dt className="text-base font-semibold ">Nombre</dt>
+                    <dd className="text-sm font-normal">{shippingInfo.name+' '+shippingInfo.surname}</dd>
                     </div>
 
                     <div className="flex justify-between w-full items-center py-3 my-2">
-                    <dt className="text-lg font-semibold text-white">DNI</dt>
-                    <dd className="mt-1 text-sm font-normal primaryColor base:col-span-2 base:mt-0">{shippingInfo.dni}</dd>
+                    <dt className="text-lg font-semibold ">DNI</dt>
+                    <dd className="mt-1 text-sm font-normal base:col-span-2 base:mt-0">{shippingInfo.dni}</dd>
                     </div>
 
                     <div className="flex justify-between w-full items-center py-3 my-2">
-                    <dt className="text-lg font-semibold text-white">Numero de telefono</dt>
-                    <dd className="mt-1 text-sm font-normal primaryColor base:col-span-2 base:mt-0">{shippingInfo.phone_number}</dd>
+                    <dt className="text-base font-semibold ">Numero de telefono</dt>
+                    <dd className="mt-1 text-sm font-normal base:col-span-2 base:mt-0">{shippingInfo.phone_number}</dd>
                     </div>
 
                     <div className="flex justify-between w-full items-center py-3 my-2">
-                    <dt className="text-lg font-semibold text-white">Provincia</dt>
-                    <dd className="mt-1 text-sm font-normal primaryColor base:col-span-2 base:mt-0">{shippingInfo.province}</dd>
+                    <dt className="text-base font-semibold ">Provincia</dt>
+                    <dd className="mt-1 text-sm font-normal base:col-span-2 base:mt-0">{shippingInfo.province}</dd>
                     </div>
 
 
                     <div className="flex justify-between w-full items-center py-3 my-2">
-                    <dt className="text-lg font-semibold text-white">Localidad</dt>
-                    <dd className="mt-1 text-sm font-normal primaryColor base:col-span-2 base:mt-0">{shippingInfo.locality}</dd>
+                    <dt className="text-base font-semibold ">Localidad</dt>
+                    <dd className="mt-1 text-sm font-normal base:col-span-2 base:mt-0">{shippingInfo.locality}</dd>
                     </div>
 
                     <div className="flex justify-between w-full items-center py-3 my-2">
-                    <dt className="text-lg font-semibold text-white">Barrio</dt>
-                    <dd className="mt-1 text-sm font-normal primaryColor base:col-span-2 base:mt-0">{shippingInfo.neighborhood}</dd>
+                    <dt className="text-base font-semibold ">Barrio</dt>
+                    <dd className="mt-1 text-sm font-normal base:col-span-2 base:mt-0">{shippingInfo.neighborhood}</dd>
                     </div>
 
                     <div className="flex justify-between w-full items-center py-3 my-2">
-                    <dt className="text-lg font-semibold text-white">Direccion</dt>
-                    <dd className="mt-1 text-sm font-normal primaryColor base:col-span-2 base:mt-0">{shippingInfo.address}</dd>
+                    <dt className="text-base font-semibold ">Direccion</dt>
+                    <dd className="mt-1 text-sm font-normal base:col-span-2 base:mt-0">{shippingInfo.address}</dd>
                     </div>
 
                     <div className="flex justify-between w-full items-center py-3 my-2">
-                    <dt className="text-lg font-semibold text-white">Codigo Postal</dt>
-                    <dd className="mt-1 text-sm font-normal primaryColor base:col-span-2 base:mt-0">{shippingInfo.post_code}</dd>
+                    <dt className="text-base font-semibold ">Codigo Postal</dt>
+                    <dd className="mt-1 text-sm font-normal base:col-span-2 base:mt-0">{shippingInfo.post_code}</dd>
                     </div>
                     
                 </div>
@@ -98,24 +98,24 @@ export const Pay = ({shippingInfo, token, user}) => {
 
                 {/*Informacion del pago*/}
 
-                <div className="bg-black rounded-lg mb-1 text-lg p-3 text-white ">
+                <div className="bg-black rounded-lg mb-1 text-lg p-3  ">
                     <div className="flex justify-between mb-2">
-                    <dt className="text-sm font-semibold">Subtotal</dt>
-                    <dd className="mt-1 text-xs font-normal base:col-span-2 base:mt-0">${total}</dd>
+                    <dt className="text-sm font-semibold text-white">Subtotal</dt>
+                    <dd className="mt-1 text-sm font-normal text-white base:col-span-2 base:mt-0">${total}</dd>
                     </div>
 
                     <div className="flex justify-between mb-2">
-                    <dt className="text-sm font-semibold">Envio</dt>
-                    <dd className="mt-1 text-xs font-normal base:col-span-2 base:mt-0">$0.5</dd>
+                    <dt className="text-sm font-semibold text-white">Envio</dt>
+                    <dd className="mt-1 text-sm font-normal text-white base:col-span-2 base:mt-0">$0.5</dd>
                     </div>
 
                     <div className="flex justify-between mb-2">
-                    <dt className="text-sm font-semibold">Total</dt>
-                    <dd className="mt-1 text-xs font-normal base:col-span-2 base:mt-0">${total+0.5}</dd>
+                    <dt className="text-sm font-semibold text-white">Total</dt>
+                    <dd className="mt-1 text-sm font-normal text-white base:col-span-2 base:mt-0">${total+0.5}</dd>
                     </div>
                     
                     <button onClick={getPayLink} disabled={!user ? false : true} 
-                    className="rounded-3xl w-full p-1 primary text-center text-black my-2">
+                    className="button-animation hover:p-2 rounded duration-150 w-full p-1 primary text-sm font-semibold my-2">
                             Pagar
                     </button>
                 </div>

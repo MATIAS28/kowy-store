@@ -5,7 +5,7 @@ export const cartContext = createContext()
 
 export function CartProvider ({children}){
     const [cart, dispatch] = useReducer(cartReducer, cartState)
-    const [expandCart, setExpandCart] = useState()
+    const [expandCart, setExpandCart] = useState('false')
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify({cart: cart.cart, total: cart.total}))
     },[cart])

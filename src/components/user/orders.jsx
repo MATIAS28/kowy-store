@@ -1,4 +1,4 @@
-import { ExclamationCircleIcon } from '@heroicons/react/24/solid'
+import { NotFoundComponent } from "../notFound"
 
 export const Orders = ({orders}) => {
     return(
@@ -9,12 +9,7 @@ export const Orders = ({orders}) => {
             {/*No hay ordenes*/}
 
             {orders.length === 0 && 
-                <div className="flex items-center justify-center w-full h-24">
-                <div className="flex flex-col items-center text-center">
-                <ExclamationCircleIcon className="w-7 h-7" fill="gray"/>
-                <p className="w-full text-lg my-2 text-gray-400 font-mono">No tienes Ordenes</p>
-                </div>
-                </div>
+                <NotFoundComponent name={'ordenes'}/>
             }
 
             {/*Ordenes*/}
@@ -52,36 +47,48 @@ export const Orders = ({orders}) => {
 
                     </div>
 
-                    <div className={`px-4 md:px-7 py-1 md:py-2 my-2 md:my-0 rounded-3xl ${order.delivered ? 'primary' : 'secondary text-white'}`}>
-                        <h4 className="text-sm text-center">{order.delivered ? 'Enviado' : 'En proceso'}</h4>
+                    <div className={`px-4 md:px-4 py-1 md:py-2 my-2 md:my-0 rounded ${order.delivered ? 'primary' : 'secondary text-white'}`}>
+                        <h4 className="text-xs font-semibold text-center">{order.delivered ? 'Enviado' : 'En proceso'}</h4>
                     </div>
                 </div>
 
                 {/*Productos de las ordenes*/}
 
-                    <div className="p-2 md:p-3 my-3 md:my-0">
+                    <div className="p-2 md:p-3 my-3 md:my-0 space-y-2 divide-y">
 
                         {order.products.map((product, i) => {
                         return(
                         <div key={i} className="flex md:justify-between items-center w-full">
-                            <div className="flex w-full">
-                                <img className="rounded w-16 md:w-28 h-16 md:h-28 mr-2 md:mr-4" src={product.img} alt={product.unit_price} />
+                            <div className="flex w-full py-6">
+
+                                <div className="hidden justify-around items-center bg-gray-100 rounded mr-2 h-fit divide-y">
+                                    <span className="text-xs uppercase p-1 px-2">{product.size} </span>
+                                    <span className="text-xs p-1 px-2 font-semibold">
+                                        X{product.quantity}
+                                    </span>
+                                </div>
+
+                                <img className="rounded w-20 md:w-20 h-16 md:h-20 mr-2 md:mr-4" src={product.img} alt={product.unit_price} />
                                 <div className="w-full md:w-2/4">
                                     <div className="flex justify-between items-center w-full">
-                                        <p className="text-sm font-semibold secondaryColor">{product.brand} </p>
-                                        <div className="flex items-center space-x-2 primary px-2 py-[0.2rem] md:py-1 rounded-3xl">
-                                            <p className="font-semibold text-xs">{product.size} </p>
-                                            <p className="font-semibold text-xs">
-                                                X{product.quantity}
-                                            </p>
-                                        </div>
+                                        <p className="text-xs font-semibold secondaryColor">{product.brand} </p>
                                     </div>
-                                    <p className="text-base md:text-lg font-medium">{product.name} </p>
-                                    <p className="text-xs font-medium hidden md:block">{product.description} </p>
-                                    <p className="text-sm md:text-sm font-semibold block md:hidden">${product.unit_price}</p>
+                                    <p className="text-xs md:text-sm w-full">{product.name} </p>
+                                    <p className="text-xs hidden md:block font-light">{product.description} </p>
+                                    <p className="text-xs md:text-sm font-light md:font-semibold block md:hidden">${product.unit_price}</p>
                                 </div>
                             </div>
-                            <p className="text-xs md:text-sm font-semibold hidden md:block">${product.unit_price}</p>
+
+                            <div className="md:w-20 space-y-2">
+                                <div className="flex flex-col md:flex-row justify-around items-center md:space-x-2 bg-gray-100 md:p-1 rounded divide-y">
+                                    <span className="font-semibold text-xs p-1 px-2 md:px-0 uppercase text-center">{product.size} </span>
+                                    <span className="font-semibold text-xs p-1 px-2 md:px-0 text-center">
+                                        X{product.quantity}
+                                    </span>
+                                </div>
+                                <p className="text-xs md:text-base font-light text-center hidden md:block">${product.unit_price}</p>
+                            </div>
+
                         </div>
                         )
                         })}

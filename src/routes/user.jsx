@@ -20,7 +20,6 @@ function User () {
     const getUserData = async () => {
         const orders = await axios.get(URL+'orders', {headers:{'auth-token': user}})
         const userData = await axios.get(URL+'user', {headers:{'auth-token': user}})
-        console.log(orders);
         
         setUserData({orders: orders.data.orders, user: userData.data.user})
     }
@@ -46,7 +45,7 @@ function User () {
     }
 
     return(
-    <div className="block md:flex">
+    <div className="block md:flex bg-white">
         <Profile userData={userData} setSectionSelector={setSectionSelector} 
         sectionSelector={sectionSelector}/>
 
@@ -57,7 +56,7 @@ function User () {
                 <Orders orders={userData.orders}/>
             </div>
                 :
-            <div className="rounded h-4/5 bg-gray-100 w-full md:h-screen md:overflow-y-auto p-2">
+            <div className="rounded h-4/5 w-full md:h-screen md:overflow-y-auto p-2">
                 <ShippingInfoComponent userPage={true} token={user} getUserData={getUserData}/> 
                 <div>
                 <Addresses userData={userData}/>

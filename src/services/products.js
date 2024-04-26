@@ -28,6 +28,14 @@ export const getAllProducts = async (filters) => {
     }
 }
 
+export const getNewArrivals = async (limit) => {
+    try {
+        const products = await axios.get(URL+'new-arrivals/'+ (limit || 0))
+        return products.data
+    } catch (e) {
+        throw e
+    }
+}
 
 export const getProductsByCategory = async (category, limit) => {
     try {

@@ -34,6 +34,14 @@ body{
     display: none;
 }
 
+button:active {
+    transform: translateY(-1px);
+}
+
+.button-animation:active{
+    letter-spacing: 2px ;
+}
+
 #profile-background{
     background-color: #141414;
 }
@@ -55,3 +63,4 @@ body{
 #order-container{
     background-color: #141414;
 }
+

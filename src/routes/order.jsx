@@ -9,9 +9,9 @@ import { cartContext } from "../context/cartContext/cartContext"
 function Order(){
     const {user, user_id} = useContext(AuthContext)
     const {cart} = useContext(cartContext)
-    const [shippingInfo, setShippingInfo] = useState({})
+    const [shippingInfo, setShippingInfo] = useState(null)
     const [step, setSteps] = useState(0)
-    const [btn, setBtn] = useState(false)
+    const [btn, setBtn] = useState(true)
     const steps = [<UserOrderComponent  order={true}/>, <ShippingInfoComponent setBtnO={setBtn} shippingInfo={shippingInfo} setShippingInfo={setShippingInfo} token={user} />, <Pay shippingInfo={shippingInfo} token={user} user={user_id} />] 
     
 
@@ -19,40 +19,26 @@ function Order(){
         document.documentElement.scrollTop = 0;
         document.body.scrollTop = 0;
 
-        if(step >= 0 && !user) {
-            setSteps(0)
+        if (!user) {
+            return setBtn(true)
         }
 
-        if(step > 1 && Object.keys(shippingInfo).length < 9) {
-            setSteps(1)
+        if(step > 0 && !shippingInfo) {
+           return setBtn(true)
         }
 
-        if(step == 1 && Object.keys(shippingInfo).length < 9) {
-            setBtn(true)
-        }
-
-        if(step == 1 && Object.keys(shippingInfo).length >= 9) {
-            setBtn(false)
-        }
-
-        if(step == 0 && !user) {
-            setBtn(true)
-        }
-
-        if(step == 0 && user) {
-            setBtn(false)
-        }
+        setBtn(false)
 
     },[shippingInfo, user, step, cart])
-    
+
     if(step > 3) return <Error/>
 
     return(
-        <div id="order-container" className="flex flex-col justify-center pt-8 pb-4 min-h-screen">
+        <div className="flex flex-col justify-center pt-8 pb-4 min-h-screen">
             <ul className="flex justify-center my-4 space-x-2">
-                <li  className={`rounded-3xl p-4 ${step >= 0 && user ? 'primary' : 'bg-black text-white'}`}>1</li>
-                <li  className={`rounded-3xl p-4 ${step > 1 ? 'primary'  :  'bg-black text-white'}`}>2</li>
-                <li  className={`rounded-3xl p-4 ${step == 2 ? 'primary'  :  'bg-black text-white'}`}>3</li>
+                <li  className={`rounded-full p-4 text-sm ${step >= 0 && user ? 'primary' : 'bg-black text-white'}`}>1</li>
+                <li  className={`rounded-full p-4 text-sm ${step > 1 ? 'primary'  :  'bg-black text-white'}`}>2</li>
+                <li  className={`rounded-full p-4 text-sm ${step == 2 ? 'primary'  :  'bg-black text-white'}`}>3</li>
             </ul>
 
             <div id="stepper" className="px-8 min-h-screen">
@@ -60,7 +46,7 @@ function Order(){
                     {steps[step]}
                 </div>
                 <div className="flex justify-center mt-7">
-                    <button disabled={btn} className="rounded w-72 bg-black primaryColor py-2 px-4 disabled:opacity-50"
+                    <button disabled={btn} className="rounded w-72 bg-black text-white py-2 px-4 disabled:opacity-50 text-sm font-semibold"
                     onClick={() => step === 2 ? setSteps(prev => prev-1) : setSteps(prev => prev+1)}>{step === 2 ? 'Atras' : 'Siguiente'} </button>
                 </div>
             </div>

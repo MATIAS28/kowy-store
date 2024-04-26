@@ -16,13 +16,25 @@ const Filters = ({filters, setFilters, setShowFiltersMobile}) => {
     }
 
     const handlerAddFilter = (filter, value) => {
-        if (!(filters[filter].find((Filter) => Filter === value)) ) {
-            const newFilters = [...filters[filter], value]
-            return setFilters({...filters, [filter]: newFilters})
-        }else{
-            const deleteFilter = filters[filter].filter((item) => item !== value)
-            return setFilters({...filters, [filter]: deleteFilter})
+        const includesNewArrivals = filters.category.includes('new-arrivals');
+
+        if (value === 'new-arrivals') {
+            const newCategory = includesNewArrivals ? [] : ['new-arrivals'];
+            return setFilters({ category: newCategory, brand: [] });
         }
+        
+        const Filter = filters[filter];
+        const valueExists = Filter.includes(value);
+
+        const newFilter = valueExists
+            ? Filter.filter(item => item !== value)
+            : [...Filter, value];
+
+        const updateFilter = {...filters, [filter]: newFilter}
+
+        if (includesNewArrivals) updateFilter.category.shift()
+
+        return setFilters(updateFilter);
     }
 
     useEffect(() => {
@@ -47,9 +59,21 @@ const Filters = ({filters, setFilters, setShowFiltersMobile}) => {
                     <h4 className="text-2xl secondaryColor font-bold ml-3">Categorías</h4>
 
                     <div className="grid grid-cols-1">
+
+                    <button onClick={() => handlerAddFilter('category', 'new-arrivals')}
+                        className={`flex items-center secondaryColor w-fit my-1 rounded-3xl px-3 py-1
+                        ${filters.category.includes('new-arrivals') ? 
+                        'text-sm font-semibold primary'
+                        : ''}`}>
+                            <p className="text-xl md:text-sm mr-2 text-start font-light uppercase">
+                            nuevos ingresos
+                            </p>
+                            <XCircleIcon className={`w-4 h-4 fill-black ${filters.category.includes('new-arrivals') ? 'block' : 'hidden'}`}/>
+                    </button>
+
                     {filtersToShow && filtersToShow.categories && 
                      filtersToShow.categories.map((category, i) => {
-                        const isSelected = filters?.category.find((filter) => filter === category)
+                        const isSelected = filters.category.includes(category)
                         return(
                               <button key={i}  onClick={() => handlerAddFilter('category', category)}
                               className={`flex items-center secondaryColor w-fit my-1 rounded-3xl px-3 py-1
@@ -74,7 +98,7 @@ const Filters = ({filters, setFilters, setShowFiltersMobile}) => {
                     <div className="grid grid-cols-1 w-full">
                      {filtersToShow && filtersToShow.brands && 
                          filtersToShow.brands.map((brand, i) => {
-                          const isSelected = filters?.brand.find((filter) => filter === brand)
+                          const isSelected = filters.brand.includes(brand)
                           return(
                                 <button key={i}  onClick={() => handlerAddFilter('brand', brand)}
                                 className={` flex items-center secondaryColor w-fit my-1 rounded-3xl px-3 py-1
