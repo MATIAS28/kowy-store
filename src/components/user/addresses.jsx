@@ -9,7 +9,12 @@ export const Addresses = ({userData}) => {
         {/*No hay direcciones*/}
 
         {userData.user && userData.user.addresses.length == 0 && 
-        <NotFoundComponent name={'direcciones'}/>}
+        
+        <div className='h-screen'>
+            <NotFoundComponent name={'direcciones'}/>
+        </div>
+        
+        }
 
         {/*Direcciones*/}
 

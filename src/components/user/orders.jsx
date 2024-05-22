@@ -2,14 +2,17 @@ import { NotFoundComponent } from "../notFound"
 
 export const Orders = ({orders}) => {
     return(
-        <div className="w-full h-full">
+        <div className="w-full">
         
-        <div className="grid grid-cols-1 overflow-y-auto h-full space-y-3 p-2">
-            {/*No hay ordenes*/}
+        {/*No hay ordenes*/}
 
-            {orders.length === 0 && 
+        {orders.length === 0 && 
+            <div className="h-screen">
                 <NotFoundComponent name={'ordenes'}/>
-            }
+            </div>
+        }
+
+        <div className="grid grid-cols-1 overflow-y-auto h-full space-y-3 p-2">
 
             {/*Ordenes*/}
 
