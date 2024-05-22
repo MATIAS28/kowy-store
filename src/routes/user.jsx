@@ -45,22 +45,19 @@ function User () {
     }
 
     return(
-    <div className="block md:flex bg-white">
+    <div className="bg-white">
         <Profile userData={userData} setSectionSelector={setSectionSelector} 
         sectionSelector={sectionSelector}/>
 
-        <div className="flex w-full p-0 w-full md:h-screen">
+        <div className="flex justify-center w-full py-4">
             {sectionSelector ? 
             
-            <div id="user-data" className="w-full h-4/5">        
+            <div id="user-data" className="w-full md:w-4/5">        
                 <Orders orders={userData.orders}/>
             </div>
                 :
-            <div className="rounded h-4/5 w-full md:h-screen md:overflow-y-auto p-2">
-                <ShippingInfoComponent userPage={true} token={user} getUserData={getUserData}/> 
-                <div>
+            <div className="w-full md:w-4/5">
                 <Addresses userData={userData}/>
-                </div>
             </div>}
         </div>
     </div>

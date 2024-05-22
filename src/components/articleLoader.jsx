@@ -1,6 +1,6 @@
 
 export const ArticlesLoader = () => {
-    const repeat = [1,2,3,4,5,6, 7, 8]
+    const repeat = [1,2,3,4]
     return(
         <>
             {repeat.map((number, i) => {

@@ -3,7 +3,6 @@ import { NotFoundComponent } from "../notFound"
 export const Orders = ({orders}) => {
     return(
         <div className="w-full h-full">
-        <h3 className="text-2xl font-semibold p-3 my-2">Tus pedidos</h3>
         
         <div className="grid grid-cols-1 overflow-y-auto h-full space-y-3 p-2">
             {/*No hay ordenes*/}

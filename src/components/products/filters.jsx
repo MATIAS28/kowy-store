@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { getFilters } from "../../services/products"
 import { XMarkIcon, XCircleIcon } from '@heroicons/react/24/solid' 
 
-const Filters = ({filters, setFilters, setShowFiltersMobile}) => {
+const Filters = ({filters, setFilters, setShowFiltersMobile, location}) => {
     const [filtersToShow, setFiltersToShow] = useState({})
 
     const getAllFilters = async () => {
@@ -38,8 +38,12 @@ const Filters = ({filters, setFilters, setShowFiltersMobile}) => {
     }
 
     useEffect(() => {
+        setFilters({
+            category: [location],
+            brand: [],
+        })
         getAllFilters()
-    }, [])
+    }, [location])
 
     return(
         <div className="p-5 md:p-0">

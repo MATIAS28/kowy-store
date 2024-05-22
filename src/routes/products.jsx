@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { getAllProducts, getNewArrivals } from "../services/products"
 import Product from "../components/product/product"
 import Loader from "../components/loader"
-import {ExclamationTriangleIcon, FunnelIcon} from '@heroicons/react/24/solid'
+import { FunnelIcon } from '@heroicons/react/24/solid'
 import { useLocation } from "react-router-dom"
 import { NotFoundComponent } from "../components/notFound"
 
@@ -59,9 +59,9 @@ function Products ({params}){
 
     if (showFiltersMobile) {
         return <Filters filters={filters} setFilters={setFilters} 
-        setShowFiltersMobile={setShowFiltersMobile}/>
+        setShowFiltersMobile={setShowFiltersMobile} location={location} />
     }
-    
+
     return(
     <div className="block w-full p-2">
         <div className="flex justify-center ip-5 my-7">
@@ -88,7 +88,7 @@ function Products ({params}){
             </div>
 
             <div className="hidden md:flex w-2/5 lg:w-1/4 h-full mx-7">
-                <Filters filters={filters} setFilters={setFilters}/>
+                <Filters filters={filters} setFilters={setFilters} location={location} />
             </div>
 
             <div className={`${products && products.length > 0 ? '' : 'hidden'} w-full`}>

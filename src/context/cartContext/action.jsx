@@ -35,15 +35,15 @@ export const removeProduct = async (cart, product, dispatch, total) => {
 
 export const addOrRemoveProduct = async (cart, product, dispatch, update, total) => {
     let subtraction;
-    const filter = await cart.filter((item) => item !== product)
+    const index = await cart.findIndex((item) => item._id == product._id)
 
     if (update) {
-        product.quantity = product.quantity+1
+        cart[index].quantity = product.quantity+1
         subtraction = total+product.unit_price
     }else{
-        product.quantity = product.quantity-1
+        cart[index].quantity = product.quantity-1
         subtraction = total-product.unit_price
     }
 
-    dispatch({type: 'UPDATE_CART', products: [...filter, product], total: subtraction})
+    dispatch({type: 'UPDATE_CART', products: cart, total: subtraction})
 }
