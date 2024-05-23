@@ -57,10 +57,10 @@ function Products ({params}){
         
     }, [filters])
 
-    if (showFiltersMobile) {
+   /*if (showFiltersMobile) {
         return <Filters filters={filters} setFilters={setFilters} 
         setShowFiltersMobile={setShowFiltersMobile} location={location} />
-    }
+    }*/
 
     return(
     <div className="block w-full p-2">
@@ -76,22 +76,30 @@ function Products ({params}){
         <div className="md:flex justify-around my-12">
 
             <div className="flex md:hidden justify-between items-center w-full my-4">
-                <button onClick={() => setShowFiltersMobile(true)}
-                className="flex items-center secondary py-1 px-5 text-lg rounded-lg">
-                    <span className="text-white mr-2">Filtrar</span>
+                <button onClick={() => setShowFiltersMobile(prev => !prev)}
+                className="flex items-center bg-neutral-950 py-1 px-5 text-lg rounded-lg">
+                    <span className="text-white text-sm mr-2 font-semibold">Filtrar</span>
                     <FunnelIcon className="w-5 h-5 fill-white"/>
                 </button>
 
-                <button className="primary font-semibold py-1 px-5 rounded-lg">
-                    <span className="text-lg mr-2">Nuevo</span>
+                <button className="primary font-semibold py-1 px-5 rounded-lg"
+                onClick={() => setFilters({ category: 'new-arrivals', brand: [] })}>
+                    <span className="text-sm mr-2">Nuevo</span>
                 </button>
             </div>
 
             <div className="hidden md:flex w-2/5 lg:w-1/4 h-full mx-7">
                 <Filters filters={filters} setFilters={setFilters} location={location} />
-            </div>
+            </div> 
 
-            <div className={`${products && products.length > 0 ? '' : 'hidden'} w-full`}>
+            <div className={`w-full h-full
+                ${showFiltersMobile ? '' : 'hidden'}`}>
+                <Filters filters={filters} setFilters={setFilters} 
+                setShowFiltersMobile={setShowFiltersMobile} location={location}/>
+            </div> 
+
+
+            <div className={`${products && products.length > 0 &&  !showFiltersMobile ? '' : 'hidden'} w-full`}>
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 px-0 md:px-4">
                 {products && products.length > 0 && products.map((product, i) => {
                     return <Product key={i} product={product}/>

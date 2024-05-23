@@ -1,4 +1,3 @@
-import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { getFilters } from "../../services/products"
 import { XMarkIcon, XCircleIcon } from '@heroicons/react/24/solid' 
