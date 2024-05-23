@@ -20,7 +20,7 @@ async function getAllProducts(req, res){
 
     try {
 
-        if(category.length === 0){
+        if(category.length === 0 && brand.length === 0){
          const products = await Product.find()
          return res.status(200).send(products)
         }

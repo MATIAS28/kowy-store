@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 //CORS
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', process.env.CLIENT_URL);
-    res.header('Access-Control-Allow-Headers', 'auth-token, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+    res.header('Access-Control-Allow-Headers', 'Authorization, auth-token, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
     res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
     next();
@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 const UserRoute = require('../routes/users');
 const ProductsRouter = require('../routes/products');
 const OrderRouter = require('../routes/orders');
-const AdminRoutes = require('../routes/admin')
+const AdminRoutes = require('../routes/admin');
 
 app.use('/api', UserRoute);
 app.use('/api', ProductsRouter);

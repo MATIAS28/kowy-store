@@ -1,9 +1,70 @@
+const Admin = require('../models/admin')
+const jwt = require('../services/jwt');
+
 const Products = require('../models/products')
 const Orders = require('../models/order')
 const Users = require('../models/user')
+
+const bcrypt = require('bcrypt');
+const salts = Number(process.env.ADMIN_SALTS)
+
 const { imgsUploader, deleteImages } = require('../services/upload');
 const fs = require('fs-extra');
+ 
+//Admin
+async function signin (req, res){
+    const newAdmin  = req.body;
+    const admin = new Admin(newAdmin);
+    const {email, password} = newAdmin
 
+    if (!email) return res.status(404).send({message: 'Ingresa el email'})
+
+    try {
+        const existsAdmin = await Admin.findOne({email: email})
+        
+        if (existsAdmin !== null) return res.status(404).send({message: 'El admin ya existe'})
+
+        bcrypt.hash(password, salts, async (err, hash) => {
+            if(err) return res.status(500).send({message: 'Error al registrar el administrador'});
+            admin.password = hash
+            const adminSaved = await admin.save()
+
+            return res.status(201).send('Admin creado correctamente')
+        })
+    
+    } catch (e) {
+        return res.status(500).send({message: 'Error al registrar el administrador'});
+    }
+
+}
+
+
+//login
+async function login(req, res){
+    const {email, password} = req.body;
+
+    if (!email && !password) return res.status(404).send({message: 'Faltan datos'})
+
+   try {
+    const admin = await Admin.findOne({email: email})
+
+    if (admin == null) return res.status(404).send({message: 'Admin no encontrado'})
+
+    bcrypt.compare(password, admin.password, (err, result) => {
+        if(err) return res.status(500).send({message: 'Erro al iniciar sesion'});
+        if(result){
+            return res.status(200).send({token: jwt.createAdminToken(admin), name: admin.name});
+        }else{
+            return res.status(500).send({message: 'Error al iniciar session'});
+        }
+    });
+   } catch (e) {
+    return res.status(500).send('Hubo un error al iniciar session')
+   }
+}
+
+
+//Statistics 
 async function getGeneralStatistics (req, res) {
     const {days} = req.params
     const endDate = new Date()
@@ -324,6 +385,10 @@ async function deleteUser(req, res){
 }
 
 module.exports = {
+    //Admin
+    signin,
+    login,
+
     //Statistics
     getGeneralStatistics,
     getPendingOrders,
