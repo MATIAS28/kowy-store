@@ -83,7 +83,7 @@ function Products ({params}){
                 </button>
 
                 <button className="primary font-semibold py-1 px-5 rounded-lg"
-                onClick={() => setFilters({ category: 'new-arrivals', brand: [] })}>
+                onClick={() => setFilters({ category: ['new-arrivals'], brand: [] })}>
                     <span className="text-sm mr-2">Nuevo</span>
                 </button>
             </div>

@@ -31,6 +31,8 @@ const Filters = ({filters, setFilters, setShowFiltersMobile, location}) => {
 
         const updateFilter = {...filters, [filter]: newFilter}
 
+        console.log(filters);
+
         if (includesNewArrivals) updateFilter.category.shift()
 
         return setFilters(updateFilter);
@@ -45,7 +47,7 @@ const Filters = ({filters, setFilters, setShowFiltersMobile, location}) => {
     }, [location])
 
     return(
-        <div className="p-5 md:p-0">
+        <div className="p-2 md:p-5 md:p-0">
 
                 <div className="block md:hidden relative p-4">
                     <h4 className="text-center text-xl font-semibold">
@@ -66,9 +68,9 @@ const Filters = ({filters, setFilters, setShowFiltersMobile, location}) => {
                     <button onClick={() => handlerAddFilter('category', 'new-arrivals')}
                         className={`flex items-center secondaryColor w-fit my-1 rounded-3xl px-3 py-1
                         ${filters.category.includes('new-arrivals') ? 
-                        'text-sm font-semibold primary'
+                        'text-lg md:text-sm font-semibold primary'
                         : ''}`}>
-                            <p className="text-xl md:text-sm mr-2 text-start font-light uppercase">
+                            <p className="text-lg md:text-sm mr-2 text-start font-light uppercase">
                             nuevos ingresos
                             </p>
                             <XCircleIcon className={`w-4 h-4 fill-black ${filters.category.includes('new-arrivals') ? 'block' : 'hidden'}`}/>
@@ -81,9 +83,9 @@ const Filters = ({filters, setFilters, setShowFiltersMobile, location}) => {
                               <button key={i}  onClick={() => handlerAddFilter('category', category)}
                               className={`flex items-center secondaryColor w-fit my-1 rounded-3xl px-3 py-1
                               ${isSelected ? 
-                              'text-sm primaryColor font-semibold bg-gray-300'
+                              'text-lg md:text-sm primaryColor font-semibold bg-gray-300'
                               : ''}`}>
-                                  <p className="text-xl md:text-sm mr-2 text-start font-light uppercase">
+                                  <p className="text-lg md:text-sm mr-2 text-start font-light uppercase">
                                       {category}
                                   </p>
                                   <XCircleIcon className={`w-4 h-4 fill-gray-500 ${isSelected ? 'block' : 'hidden'}`}/>
@@ -106,9 +108,9 @@ const Filters = ({filters, setFilters, setShowFiltersMobile, location}) => {
                                 <button key={i}  onClick={() => handlerAddFilter('brand', brand)}
                                 className={` flex items-center secondaryColor w-fit my-1 rounded-3xl px-3 py-1
                                 ${isSelected ? 
-                                'text-sm primaryColor font-semibold bg-gray-300'
+                                'text-lg md:text-sm primaryColor font-semibold bg-gray-300'
                                 : ''}`}>
-                                    <p className="text-xl md:text-sm mr-2 text-start font-light uppercase">
+                                    <p className="text-lg md:text-sm mr-2 text-start font-light uppercase">
                                         {brand}
                                     </p>
                                     <XCircleIcon className={`w-4 h-4 ${isSelected ? 'fill-gray-500' : 'fill-transparent'}`}/>
@@ -132,9 +134,9 @@ const Filters = ({filters, setFilters, setShowFiltersMobile, location}) => {
                                 <button key={i}  onClick={() => handlerAddFilter('brand', sizes)}
                                 className={`text-base flex items-center secondaryColor w-fit my-1 rounded-3xl px-3 py-1
                                 ${isSelected ? 
-                                'text-sm primaryColor font-semibold bg-gray-300'
+                                'text-lg md:text-sm primaryColor font-semibold bg-gray-300'
                                 : ''}`}>
-                                    <p className="text-xl md:text-sm mr-2 text-start font-light uppercase">
+                                    <p className="text-lg md:text-sm mr-2 text-start font-light uppercase">
                                         {sizes}
                                     </p>
                                     <XCircleIcon className={`w-4 h-4 ${isSelected ? 'fill-gray-500' : 'fill-transparent'}`}/>
