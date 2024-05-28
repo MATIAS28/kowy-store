@@ -23,10 +23,10 @@ export const NewArrivalsComponent = () => {
     }, [])
 
     return(
-        <div  className="flex items-center justify-center my-4 w-full primary p-3 md:p-5 h-full">
+        <div  className="flex items-center justify-center my-4 w-full primary h-full md:py-4">
             <div className="md:flex items-center sm:w-3/5 md:w-4/5 sm:h-fit lg:h-[30rem]">
 
-                <div className="relative flex-col w-full md:w-2/5 primary h-full lg:h-[24rem] md:mx-4 md:p-2">
+                <div className="relative flex-col w-full md:w-2/5 primary h-full lg:h-[24rem]">
                     <h4 className="text-lg md:text-xl secondaryColor font-semibold">Nuevos Ingresos</h4>
                     <p className="relative text-xs text-light md:text-base   my-3 my-3">
                         ¡Descubre la emoción de lo nuevo cada mes! 

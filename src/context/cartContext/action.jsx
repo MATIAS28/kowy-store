@@ -46,4 +46,4 @@ export const addOrRemoveProduct = async (cart, product, dispatch, update, total)
     }
 
     dispatch({type: 'UPDATE_CART', products: cart, total: subtraction})
-}
+} 

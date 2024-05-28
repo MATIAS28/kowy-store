@@ -57,11 +57,6 @@ function Products ({params}){
         
     }, [filters])
 
-   /*if (showFiltersMobile) {
-        return <Filters filters={filters} setFilters={setFilters} 
-        setShowFiltersMobile={setShowFiltersMobile} location={location} />
-    }*/
-
     return(
     <div className="block w-full p-2">
         <div className="flex justify-center ip-5 my-7">

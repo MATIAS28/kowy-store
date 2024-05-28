@@ -87,15 +87,16 @@ function ProductRoute (){
             <div className="my-4 items-center">
 
                 <div className='my-4'>
-                <p className="text-sm font-semibold">Elige un talle</p>
-                <ul className="grid max-w-6xl  grid-cols-4 gap-6 my-4 w-4/5 h-28">
+                <p className="text-2xl secondaryColor my-4">{'$'+product.price}</p>
+                <p className="text-base font-light">Elige un talle</p>
+                <ul className="grid grid-cols-5 my-4 w-4/5">
                 {product && product.sizes.map((size, i) => {
                 return(
                     <li key={i} 
-                    className={`flex items-center justify-center cursor-pointer w-14 h-9 rounded duration-150
-                    ${size.size === sizeSelect ? 'shadow-lg bg-black text-white font-semibold' : ''}`}
+                    className={`flex items-center justify-center cursor-pointer w-12 h-6 rounded duration-150
+                    ${size.size === sizeSelect ? 'shadow-lg bg-black text-white font-semibold' : 'border-2 font-light'}`}
                     onClick={() => setSizeSelect(size.size)}>
-                        <span className='text-lg'>{size.size}</span>
+                        <span className='text-sm'>{size.size}</span>
                     </li>
                 )
                 })}
@@ -105,14 +106,12 @@ function ProductRoute (){
             
             <div className="">
                 
-                <div className='flex items-center my-4'>
-                    <button className="button-animation w-full flex items-center justify-center rounded-xl bg-black text-white font-semibold py-2 mr-3 duration-150" 
+                <div className='flex items-center my-4 border-b pb-4'>
+                    <button className="button-animation w-full flex items-center justify-center rounded-xl bg-black text-white font-semibold py-2 duration-150" 
                     onClick={addProductHandler}>
-                    <ShoppingBagIcon className="h-5 w-5  mr-2 "/>
+                    <ShoppingBagIcon className="h-5 w-5"/>
                         Añadir al carrito
                     </button>
-
-                    <p className="text-lg my-3 font-semibold">{'$'+product.price}</p>
                 </div>
 
                 <div className='hidden md:block'>

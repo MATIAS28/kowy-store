@@ -14,7 +14,7 @@ const Navbar  = ({setSearch, search}) => {
   const [expand, setExpand] = useState(false)
   const [isLoged, setIsLoged] = useState('white')
   const {user} = useContext(AuthContext)
-  const {cart, setExpandCart} =  useContext(cartContext)
+  const {cart, setExpandCart, total} =  useContext(cartContext)
   const [expandCategories, setExpandCategories] = useState(null)
   const [productsCount, setProductsCount] = useState(0)
   const [categories, setCategories] = useState({})
@@ -29,12 +29,13 @@ const Navbar  = ({setSearch, search}) => {
     }
 
   useEffect(() => {
+    console.log('holas');
     let suma = 0
     cart.map((item) => suma += item.quantity)
     setProductsCount(suma)
     user != undefined ? setIsLoged('#EAEB46') : setIsLoged('white')
     getAllFilters()
-  }, [user, cart])
+  }, [user, cart, total])
 
     return(
         <nav id='navbar-desktop' className="sticky top-0 w-full drop-shadow z-40">

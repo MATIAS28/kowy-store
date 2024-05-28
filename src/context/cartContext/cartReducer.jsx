@@ -19,6 +19,7 @@ export function cartReducer(cartState, action){
             }
 
         case 'UPDATE_CART':
+            console.log(action.products);
             return {
                 cart: action.products,
                 total: action.total
