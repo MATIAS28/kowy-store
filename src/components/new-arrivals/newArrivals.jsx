@@ -23,8 +23,8 @@ export const NewArrivalsComponent = () => {
     }, [])
 
     return(
-        <div  className="flex items-center justify-center my-4 w-full primary h-full md:py-4">
-            <div className="md:flex items-center sm:w-3/5 md:w-4/5 sm:h-fit lg:h-[30rem]">
+        <div  className="flex items-center justify-center my-4 w-full primary h-full py-8 md:py-4">
+            <div className="md:flex items-center w-4/5 sm:h-fit lg:h-[30rem]">
 
                 <div className="relative flex-col w-full md:w-2/5 primary h-full lg:h-[24rem]">
                     <h4 className="text-lg md:text-xl secondaryColor font-semibold">Nuevos Ingresos</h4>
@@ -61,7 +61,7 @@ export const NewArrivalsComponent = () => {
                 
                 <div className="flex items-center justify-center md:hidden my-4 w-full">
                     <Link to={{pathname:'/products', search: 'new-arrivals'}} 
-                        className='bg-white uppercase p-2 rounded-3xl w-full text-xs font-semibold text-center'>
+                        className='bg-white uppercase py-1 md:p-2 rounded-3xl w-full text-xs md:font-semibold text-center'>
                             Nuevos ingresos
                     </Link>
                 </div>

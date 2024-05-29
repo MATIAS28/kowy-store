@@ -31,9 +31,9 @@ export const AddressesComponent = ({shippingInfo ,setShippingInfo, token}) => {
     }, [])
 
     return(
-        <div className="w-full">
-            <h3 className="text-white font-semibold p-2">Tus Direcciones</h3>
-            <div className="flex w-full overflow-x-auto p-3">
+        <div className="w-full my-4">
+            <h3 className="font-light text-sm md:text-base my-2">Tus Direcciones</h3>
+            <div className="flex w-full overflow-x-auto">
             {addresses.length > 0 && addresses.map((address, i) => {
             return(
                 <div onClick={() => addAddress(address)} 
@@ -50,9 +50,9 @@ export const AddressesComponent = ({shippingInfo ,setShippingInfo, token}) => {
                     </div>
 
                     <div className="w-full p-2">
-                    <p className="text-base text-white font-semibold">{address.name}</p>
-                    <p className="text-sm text-white font-bold">{address.locality}</p>
-                    <p className="text-xs text-white font-semibold w-full">{address.address}</p>
+                    <p className="text-base font-light">{address.name}</p>
+                    <p className="text-sm font-light">{address.locality}</p>
+                    <p className="text-xs font-light w-full">{address.address}</p>
                     </div>
                 </div>
             )

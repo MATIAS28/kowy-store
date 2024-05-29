@@ -8,7 +8,7 @@ import { addOrRemoveProduct, removeProduct } from "../../context/cartContext/act
 export const ProductCart = ({product, color, pay}) => {
     const {cart, dispatch, total} = useContext(cartContext)
     return(
-        <div className="flex items-center my-2 px-2 hover:bg-white/25">
+        <div className="flex items-center my-2 md:px-2 hover:bg-white/25">
             <li className="flex items-center p-2 max-h-20 justify-between w-full">
 
             <img src={product.img} className="h-14 w-16 rounded-lg" alt="" />

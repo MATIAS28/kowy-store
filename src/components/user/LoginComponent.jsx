@@ -4,7 +4,7 @@ import {AuthContext, DispatchContext} from "../../context/userContext/AuthContex
 import {loginUser} from "../../context/userContext/actions"
 import { toast, Toaster } from "react-hot-toast"
 
-function LoginComponent({b}){
+function LoginComponent({isOrder}){
     const {user} = useContext(AuthContext)
     const dispatch = useContext(DispatchContext)
     const [email, setEmail] = useState()
@@ -50,7 +50,7 @@ function LoginComponent({b}){
 
     return(
         
-        <>
+        <div>
         <Toaster toastOptions={{
     className: '',
     duration: 5000,
@@ -68,32 +68,35 @@ function LoginComponent({b}){
       },
     },
   }} position="bottom-right" reverseOrder={false}/>
-        <form className="primary shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
-        <h1 className="text-center text-3xl font-semibold my-4">Iniciar Sesión</h1>
+        <form onSubmit={handleSubmit}>
+        <h1 className="text-center text-lg md:text-3xl font-semibold my-4">Iniciá sesión</h1>
             <div className="mb-4">
-            <label className="block text-gray-800 text-sm font-bold mb-2" htmlFor="email">
+            <label className="block text-gray-800 text-xs md:text-sm mb-1" htmlFor="email">
                 Email
             </label>
-            <input disabled={!user ? false : true} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" placeholder="email" onChange={(e) => setEmail(e.target.value)} onBlur={handleBlur}/>
+            <input disabled={!user ? false : true} className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:outline text-xs md:text-sm" id="email" type="text" placeholder="email" onChange={(e) => setEmail(e.target.value)} onBlur={handleBlur}/>
             </div>
             <div className="mb-6">
-            <label className="block text-gray-800 text-sm font-bold mb-2" htmlFor="password">
+            <label className="block text-gray-800 text-xs md:text-sm mb-1" htmlFor="password">
                 Contraseña
             </label>
-            <input disabled={!user ? false : true} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="contraseña" onChange={(e) => setPassword(e.target.value)} onBlur={handleBlur} autoComplete="current-password"/>
+            <input disabled={!user ? false : true} className="appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:outline text-xs md:text-sm" id="password" type="password" placeholder="contraseña" onChange={(e) => setPassword(e.target.value)} onBlur={handleBlur} autoComplete="current-password"/>
             </div>
-            <div className="flex items-center justify-between">
-            
-            <button className="bg-black text-white duration-500 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:opacity-25" disabled={isValid && !user || user} type="submit">
+    
+            <button className="bg-black text-white text-xs md:text-base duration-500 py-1 px-4 rounded focus:outline-none focus:outline disabled:opacity-25 w-full mb-4 font-semibold" disabled={isValid && !user || user} type="submit">
                 Iniciar Sesión
             </button>
 
-            <Link style={{display: !user ? 'block' : 'none'}} to='/register' className="inline-block align-baseline font-bold text-base text-black border-black hover:border-b-2" href="#">
+            <div className={`flex items-center justify-center space-x-2 font-light text-xs md:text-base
+            ${isOrder ? 'hidden' : ''}`}>
+            <span>¿No tenés cuenta aún?</span>
+            <Link style={{display: !user ? 'block' : 'none'}} to='/register' className="inline-block align-baseline border-black hover:border-b-2" href="#">
                 Crear cuenta
             </Link>
             </div>
+
         </form>
-    </>
+    </div>
     )
 }
 

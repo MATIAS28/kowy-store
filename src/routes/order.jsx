@@ -34,15 +34,15 @@ function Order(){
     if(step > 3) return <Error/>
 
     return(
-        <div className="flex flex-col justify-center pt-8 pb-4 min-h-screen">
+        <div className="min-h-screen  my-8">
             <ul className="flex justify-center my-4 space-x-2">
                 <li  className={`rounded-full p-4 text-sm ${step >= 0 && user ? 'primary' : 'bg-black text-white'}`}>1</li>
                 <li  className={`rounded-full p-4 text-sm ${step > 1 ? 'primary'  :  'bg-black text-white'}`}>2</li>
                 <li  className={`rounded-full p-4 text-sm ${step == 2 ? 'primary'  :  'bg-black text-white'}`}>3</li>
             </ul>
 
-            <div id="stepper" className="px-8 min-h-screen">
-                <div className="md:flex justify-center w-full">
+            <div id="stepper" className="min-h-screen">
+                <div className="flex justify-center w-full">
                     {steps[step]}
                 </div>
                 <div className="flex justify-center mt-7">

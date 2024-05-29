@@ -25,7 +25,7 @@ export const Pay = ({shippingInfo, token, user}) => {
     }, [link])
 
     return(
-<div id="pay-container" className="w-full mb-2">
+<div id="pay-container" className="w-11/12 mb-2">
 
     {/*Toast*/}
     <Toaster toastOptions={{className: '', duration: 5000, style: {background: '#16a34a', marginTop: '10%', color: 'white',}}} position="bottom-center" reverseOrder={false}/>
@@ -38,43 +38,43 @@ export const Pay = ({shippingInfo, token, user}) => {
 
                 <div className="text-lg divide-y">
                     <div className="flex justify-between w-full items-center py-3 my-2">
-                    <dt className="text-base font-semibold ">Nombre</dt>
+                    <dt className="text-sm font-light">Nombre</dt>
                     <dd className="text-sm font-normal">{shippingInfo.name+' '+shippingInfo.surname}</dd>
                     </div>
 
                     <div className="flex justify-between w-full items-center py-3 my-2">
-                    <dt className="text-lg font-semibold ">DNI</dt>
+                    <dt className="text-sm font-light">DNI</dt>
                     <dd className="mt-1 text-sm font-normal base:col-span-2 base:mt-0">{shippingInfo.dni}</dd>
                     </div>
 
                     <div className="flex justify-between w-full items-center py-3 my-2">
-                    <dt className="text-base font-semibold ">Numero de telefono</dt>
+                    <dt className="text-sm font-light">Numero de telefono</dt>
                     <dd className="mt-1 text-sm font-normal base:col-span-2 base:mt-0">{shippingInfo.phone_number}</dd>
                     </div>
 
                     <div className="flex justify-between w-full items-center py-3 my-2">
-                    <dt className="text-base font-semibold ">Provincia</dt>
+                    <dt className="text-sm font-light">Provincia</dt>
                     <dd className="mt-1 text-sm font-normal base:col-span-2 base:mt-0">{shippingInfo.province}</dd>
                     </div>
 
 
                     <div className="flex justify-between w-full items-center py-3 my-2">
-                    <dt className="text-base font-semibold ">Localidad</dt>
+                    <dt className="text-sm font-light">Localidad</dt>
                     <dd className="mt-1 text-sm font-normal base:col-span-2 base:mt-0">{shippingInfo.locality}</dd>
                     </div>
 
                     <div className="flex justify-between w-full items-center py-3 my-2">
-                    <dt className="text-base font-semibold ">Barrio</dt>
+                    <dt className="text-sm font-light">Barrio</dt>
                     <dd className="mt-1 text-sm font-normal base:col-span-2 base:mt-0">{shippingInfo.neighborhood}</dd>
                     </div>
 
                     <div className="flex justify-between w-full items-center py-3 my-2">
-                    <dt className="text-base font-semibold ">Direccion</dt>
+                    <dt className="text-sm font-light">Direccion</dt>
                     <dd className="mt-1 text-sm font-normal base:col-span-2 base:mt-0">{shippingInfo.address}</dd>
                     </div>
 
                     <div className="flex justify-between w-full items-center py-3 my-2">
-                    <dt className="text-base font-semibold ">Codigo Postal</dt>
+                    <dt className="text-sm font-light">Codigo Postal</dt>
                     <dd className="mt-1 text-sm font-normal base:col-span-2 base:mt-0">{shippingInfo.post_code}</dd>
                     </div>
                     
@@ -134,7 +134,7 @@ export const Pay = ({shippingInfo, token, user}) => {
                         width: 100%;
                         display: flex;
                         flex-direction: column;
-                        padding: 1rem;
+                        padding: 0.4rem;
                     }
 
                     #products{

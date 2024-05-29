@@ -3,36 +3,10 @@ import RegisterComponent from "../components/user/RegisterComponent"
 function Register(){
 
     return(
-        <div id="register-container" className="min-h-screen bg-gray-50">
-            <div id="form-container" className="w-3/6 my-12">
+        <div className="flex justify-center h-fit md:min-h-screen">
+            <div className="w-4/5 lg:w-2/4">
             <RegisterComponent/>
             </div>
-            
-
-        <style jsx='true'>
-            {`
-                #register-container{
-                    margin: 0px auto;
-                    display: flex;
-                    justify-content: center;
-                    align-items: start;
-
-                }
-
-                @media(max-width: 768px){
-                    #register-container{
-                        align-items: flex-start;
-                    }
-
-                    #form-container{
-                        width: 100%;
-                        margin: 1.3rem;
-                        margin-top: 4rem;    
-                    }
-                }
-            `}
-        </style>
-
         </div>
     )
 }

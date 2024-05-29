@@ -6,14 +6,15 @@ import { ArrowLongRightIcon } from "@heroicons/react/24/solid"
 export const UserOrderComponent = () => {
     const [regOrLog, setRegOrLog] = useState(false)
     return(
-        <>
-        <div id="orderUser-conatiner" className="flex flex-col w-2/4">
-            <div style={{display: regOrLog ? 'none' : 'block'}}>
-            <LoginComponent b={false}/>
-            </div>
-            
-            <div style={{display: regOrLog ? 'block' : 'none'}}>
-            <RegisterComponent b={false}/>
+        <div className="w-3/4 md:w-2/4">
+            <div>
+                <div style={{display: regOrLog ? 'none' : 'block'}}>
+                <LoginComponent isOrder={true}/>
+                </div>
+                
+                <div style={{display: regOrLog ? 'block' : 'none'}}>
+                <RegisterComponent isOrder={true}/>
+                </div>
             </div>
 
            <div className="flex justify-end">
@@ -23,23 +24,5 @@ export const UserOrderComponent = () => {
             </button>
            </div>
         </div>
-
-        <style jsx="true">
-        {`
-             @media(max-width: 768px){
-                #orderUser-conatiner{
-                    width: 100%;
-                    padding: 0.7rem;
-                    border-radius: 2px;
-                }
-
-                .shadow-md{
-                    box-shadow: none;
-                }
-            }
-        `}
-        </style>
-
-        </>
     )
 } 

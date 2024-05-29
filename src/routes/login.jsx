@@ -14,36 +14,10 @@ function Login(){
     }, [])
 
     return(
-        <div id="login-container" className="min-h-screen bg-gray-50">
-            <div id="form-container" className="w-3/6 h-96">
-            <LoginComponent/>
-            </div>
-            
-
-        <style jsx='true'>
-            {`
-                #login-container{
-                    margin: 0px auto;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-
-                }
-
-                @media(max-width: 768px){
-                    #login-container{
-                        align-items: flex-start;
-                    }
-
-                    #form-container{
-                        width: 100%;
-                        margin: 1.3rem;
-                        margin-top: 4rem;    
-                    }
-                }
-            `}
-        </style>
-
+        <div className="flex justify-center h-fit md:min-h-screen">
+        <div className="w-4/5 lg:w-2/4">
+        <LoginComponent/>
+        </div>
         </div>
     )
 }

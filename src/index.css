@@ -30,6 +30,10 @@ body{
     color: #141414;
 }
 
+.loginColor{
+    background-color: #EAEB46;
+}
+
 #navbar-mobile{
     display: none;
 }
@@ -57,6 +61,10 @@ button:active {
 
     #navbar-desktop{
         display: none;
+    }
+
+    .loginColor{
+        background-color: transparent;
     }
 }
 

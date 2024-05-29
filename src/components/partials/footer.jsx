@@ -2,9 +2,9 @@ import { MapPinIcon, PhoneIcon } from '@heroicons/react/24/outline'
 
 const Footer = () => {
     return(
-        <div className="flex justify-center items-center w-full md:h-[12rem] border-t p-2 md:p-0">
+        <div className="flex justify-center items-center w-full h-fit md:h-[12rem] border-t p-2 md:p-0">
 
-            <div className="md:flex justify-between items-start md:w-4/5 space-y-7 md:space-y-0">
+            <div className="md:flex justify-between md:items-start md:w-4/5 space-y-7 md:space-y-0">
                 <div>
                     <h1 className="text-lg md:text-3xl uppercase font-bold">kowy store</h1>
                     <p className="text-sm md:text-base text-gray-500">Vistiéndote con estilo y elegancia en cada paso.</p>
