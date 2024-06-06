@@ -53,7 +53,7 @@ async function login(req, res){
     bcrypt.compare(password, admin.password, (err, result) => {
         if(err) return res.status(500).send({message: 'Erro al iniciar sesion'});
         if(result){
-            return res.status(200).send({token: jwt.createAdminToken(admin), name: admin.name});
+            return res.status(200).send({token: jwt.createAdminToken(admin), name: admin.name, id: admin._id});
         }else{
             return res.status(500).send({message: 'Error al iniciar session'});
         }
