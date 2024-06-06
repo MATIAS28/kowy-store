@@ -1,4 +1,5 @@
 'use client'
+import { LoaderComponent } from "@/components/loader";
 import { getOrderById, updateOrderStatus } from "@/services/ordersService";
 import { TruckIcon, UserIcon } from "@heroicons/react/24/solid";
 import { useEffect, useState } from "react";
@@ -55,99 +56,88 @@ export default function OrderPage({params}){
     }, [])
 
     if(!order){
-        return <h1>holas</h1>
+        return <LoaderComponent/>
     }
 
     return(
-        <div className="p-4">
-            <Toaster position="top-right" reverseOrder={false}/>
-
-            <div className="grid grid-cols-1 gap-12 w-full bg-white/25 p-4 rounded-xl drop-shadow-lg">
-                <div className="flex justify-between items-center">
+        <div className="flex justify-between items-start h-screen p-4 mt-4">
+            <div className="w-4/5 border rounded mr-2">
+                <div className="flex justify-between p-4 border-b">
                     <div className="flex flex-col">
-                        <span className="text-xl">Orden ID: #{order._id}</span>
-                        <span className="text-sm text-gray-700 font-semibold">{order.createdAt}</span>
+                        <span className="font-light mb-1">Orden #{order._id}</span>
+                        <span className="text-sm text-gray-500 font-semibold">{order.createdAt}</span>
                     </div>
+
                     <div className="flex items-center divide-x">
 
                     <button onClick={() => handlerUpdate(false)} 
-                    className={`flex items-center text-xs font-semibold px-4 py-2 rounded-l-xl
+                    className={`flex items-center text-xs font-semibold px-4 py-2 rounded-l
                     ${!order.delivered ? 'primary' : 'bg-white'}`}>
                         Pendiente
                     </button>
 
                     <button onClick={() => handlerUpdate(true)} 
-                    className={`flex items-center text-xs font-semibold px-4 py-2 rounded-r-xl
+                    className={`flex items-center text-xs font-semibold px-4 py-2 rounded-r
                     ${order.delivered ? 'primary' : 'bg-white'}`}>
                         Enviado
                     </button>
 
                     </div>
                 </div>
-
-                <div className="flex items-center justify-between">
-                    <div className="flex items-start">
-                        <div className="mr-4">
-                        <UserIcon className="w-16 h-16 primary p-4 rounded-full"/>
-                        </div>
-                        <div className="flex flex-col">
-                            <span className="text-xl font-semibold text-gray-700">Usuario</span>
-                            <span className="text-lg">Nombre: {order.shippingInfo.name+' '+order.shippingInfo.surname}</span>
-                            <span className="text-lg">Email: matias@matias.com</span>
-                            <span className="text-lg">Telefono: {order.shippingInfo.phone_number}</span>
-                        </div>
-                    </div>
-
-                    <div className="flex items-start">
-                        <div className="mr-4">
-                        <TruckIcon className="w-16 h-16 primary p-4 rounded-full"/>
-                        </div>
-                        <div className="flex flex-col">
-                            <span className="text-xl font-semibold text-gray-700">Información de envío</span>
-                            <span className="text-lg">Dirección: {order.shippingInfo.address}</span>
-                            <span className="text-lg">Departameto: {order.shippingInfo.province}</span>
-                            <span className="text-lg">Departameto: {order.shippingInfo.locality}</span>
-                            <span className="text-lg">Código postal: {order.shippingInfo.post_code}</span>
-                        </div>
-                    </div>
-                </div>
-
-            <div className="">
-                    <span className="text-lg font-seibold">Productos</span>
-            <table className="w-full text-left rounded-t-lg border-collapse overflow-hidden my-4">
-            <thead className="text-xs uppercase bg-white/50">
-                <tr>
-                    <th className="p-4">Nombre</th>
-                    <th className="p-4 w-1/4">Talle</th>
-                    <th className="p-4">Precio</th>
-                    <th className="p-4">Cantidad</th>
-                </tr>
-            </thead>
-
-            <tbody>
+                
+                <div className="w-full py-2">
                 {order.products.length > 0 && 
-                order.products.map((product, i) => {
-                    return(
-                        <tr key={i} className="text-sm hover:bg-white/25 cursor-pointer">
-                        <td className="flex items-center p-4">
-                        <img className="w-12 h-12 mr-2 rounded-lg" 
-                        src={product.img} alt="" />
-                        <div className="flex flex-col">
-                        <span className="text-sm font-semibold">{product.brand}</span>
-                        <span className="text-lg font-light">{product.name}</span>
+                    order.products.map((product, i) => {
+                        return(
+                        <div key={i} className="flex justify-between items-center hover:bg-white/25 cursor-pointer px-4 rounded">
+                            <div className="flex items-center py-4">
+                                <img className="w-12 h-12 mr-2 rounded-lg" src={product.img} alt="" />
+                                <div className="flex flex-col">
+                                <span className="text-xs font-bold">{product.brand}</span>
+                                <span className="text-sm">{product.name}</span>
+                                <div className="flex items-center">
+                                    <p className="text-xs text-gray-500 uppercase font-light mr-2">Talle: {product.size}</p>
+                                    <p className="text-xs text-gray-500 uppercase font-light">Cantidad: {product.quantity}</p>
+                                </div>
+                                </div>
+                            </div>
+                            
+                            <p className="text-sm font-semibold">${product.unit_price}</p>
                         </div>
-                        </td>
-                        <td className="p-4">{product.size}</td>
-                        <td className="p-4 w-24 truncate overflow-hidden">{product.unit_price}</td>
-                        <td className="p-4">{product.quantity}</td>
-                    </tr>
-                    )
-                })}
-            </tbody>
+                        )
+                    })}
+                </div>
+            </div>
 
-        </table>
+            
+
+            <Toaster position="top-right" reverseOrder={false}/>
+
+            <div className="w-3/5">
+                <div className="bg-white rounded h-fit mb-4">
+                    <div className="flex items-center mb-2 p-2 border-b">
+                    <UserIcon className="w-5 h-5 fill-black rounded-full mr-2"/>
+                    <span className="text-lg text-black font-semibold">Usuario</span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 text-gray-500 p-2">
+                        <span className="text-sm font-light">Nombre: {order.shippingInfo.name+' '+order.shippingInfo.surname}</span>
+                        <span className="text-sm font-light">Email: matias@matias.com</span>
+                        <span className="text-sm font-light">Telefono: {order.shippingInfo.phone_number}</span>
+                    </div>
                 </div>
 
+                <div className="bg-white rounded h-fit">
+                    <div className="flex items-center mb-2 p-2 border-b">
+                    <TruckIcon className="w-5 h-5 fill-black rounded-full mr-2"/>
+                    <span className="text-lg text-black font-semibold">Información de envío</span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 text-gray-500 p-2">
+                        <span className="col-span-2 text-sm font-light mb-2 text-black">Dirección: {order.shippingInfo.address}</span>
+                        <span className="text-sm font-light">Departameto: {order.shippingInfo.province}</span>
+                        <span className="text-sm font-light">Departameto: {order.shippingInfo.locality}</span>
+                        <span className="text-sm font-light">Código postal: {order.shippingInfo.post_code}</span>
+                    </div>
+                </div>
             </div>
         </div>
     )

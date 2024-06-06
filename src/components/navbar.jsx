@@ -1,71 +1,92 @@
 "use client"
 import Link from "next/link"
 import {Squares2X2Icon, TruckIcon, UserIcon, ArrowRightStartOnRectangleIcon, ShoppingCartIcon} from "@heroicons/react/24/solid"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
+
 
 export const NavbarComponent = () => {
+    const [admin, setAdmin] = useState(null)
     const route = usePathname()
+    const router = useRouter()
+    
+    useEffect(() => {
+        let Admin = JSON.parse(localStorage.getItem('admin'))
+
+        if (Admin && !admin) {
+            setAdmin(Admin)
+        }
+
+        if (!Admin) {
+            router.push('/admin')
+        }
+
+    }, [admin, route])
+
+    const handlerLogOut = () => {
+        setAdmin(null)
+        localStorage.clear()
+        router.push('/admin')
+    }
+
     return(
-        <div className="fixed md:relative bottom-0 w-full md:w-80 z-30 bg-black">
+    <div className="bg-black fixed md:relative bottom-0 w-72 w- z-30">
 
-            <h1 className="primaryColor text-3xl text-center p-2 my-4 font-bold">KOWY</h1>
-
-            <div className="flex justify-center h-1/4">
-                <div className="flex items-center primary rounded-lg p-2 h-12">
-                    <UserIcon className="w-5 h-5 mr-1"/>
-                    <h4>Matias Muñoz</h4>
+        
+            <div className="flex justify-center items-center w-full h-1/4 duration-150">
+                <div className={`flex items-center h-fit p-2 bg-white duration-150
+                ${admin ? 'w-4/5 rounded' : 'w-fit rounded-full'}`}>
+                <UserIcon className="w-9 h-9 fill-black"/>
+                { admin &&
+                    <div className="w-3/4 break-words ml-2">
+                    <h4 className="text-sm text-black uppercase font-semibold">{admin.name}</h4>
+                    <h5 className="text-xs text-gray-500 font-light h-full">#{admin.id}</h5>
+                    </div>
+                }
                 </div>
             </div>
+        
+        <div className="flex flex-col h-screen w-full">
 
-            <div className="grid grid-cols-1 place-content-start space-y-5 h-2/4 w-full">
-                <Link href="/" className="flex items-center">
-                    <div className={`w-1 h-5 rounded-r-lg ${route === "/" ? "primary" : "bg-transparent"}`} ></div>
-                    <div className="flex justify-center  w-full">
-                        <div className="flex items-center mx-auto w-3/5">
-                            <Squares2X2Icon className="w-7 h-7 fill-white mr-1"/>
-                            <span className="text-start text-white font-semibold text-xl w-full">Home</span>
-                        </div>
-                    </div>
-                </Link>
-
-                <Link href="/orders" className="flex items-center">
-                    <div className={`w-1 h-5 rounded-r-lg ${route === "/orders" ? "primary" : "bg-transparent"}`} ></div>
-                    <div className="flex justify-center w-full">
-                        <div className="flex items-center mx-auto w-3/5">
-                            <TruckIcon className="w-7 h-7 fill-white mr-1"/>
-                            <span className="text-start text-white font-semibold text-xl w-full">Ordenes</span>
-                        </div>
-                    </div>
-                </Link>
-                
-                <Link href="/products" className="flex items-center w-full">
-                    <div className={`w-1 h-5 rounded-r-lg ${route === "/products" ? "primary" : "bg-transparent"}`} ></div>
-                    <div className="flex justify-center w-full">
-                        <div className="flex items-center mx-auto w-3/5">
-                            <ShoppingCartIcon className="w-7 h-7 fill-white mr-1"/>
-                            <span className="text-start text-white font-semibold text-xl w-full">Productos</span>
-                        </div>
-                    </div>
-                </Link>
-
-                <Link href="/usuarios" className="flex items-center">
-                    <div className={`w-1 h-5 rounded-r-lg ${route === "/usuarios" ? "primary" : "bg-transparent"}`} ></div>
-                    <div className="flex justify-center w-full">
-                        <div className="flex items-center mx-auto w-3/5">
-                            <UserIcon className="w-7 h-7 fill-white mr-1"/>
-                            <span className="text-start text-white font-semibold text-xl w-full">Usuarios</span>
-                        </div>
-                    </div>
-                </Link>
-            </div>
-
-            <div className="flex justify-center">
-                <div className="flex items-center mx-auto w-1/2">
-                    <ArrowRightStartOnRectangleIcon className="w-7 h-7 fill-white mr-1"/>
-                    <span className="text-white text-sm">Cerrar session</span>
+        <div className="flex flex-col space-y-5 h-fit my-2">
+            <Link href="/" className="flex items-center justify-center w-full hover:bg-white/25 h-10">
+                <div className="flex items-center w-4/5">
+                    <Squares2X2Icon className={`w-6 h-6 mr-4  ${route == '/' ? 'primaryColor' : 'fill-gray-400'}`}/>
+                    <span className={`text-start text-gray-100 font-semibold text-sm w-full ${route == '/' ? 'primaryColor' : ''}`}>Home</span>
                 </div>
-            </div>
+            </Link>
+ 
+            <Link href="/orders" className="flex items-center justify-center w-full hover:bg-white/25 h-10">
+                <div className="flex items-center w-4/5">
+                    <TruckIcon className={`w-6 h-6 mr-4 ${route == '/orders' ? 'primaryColor' : 'fill-gray-400'}`}/>
+                    <span className={`text-start text-gray-100 font-semibold text-sm w-full ${route == '/orders' ? 'primaryColor' : ''}`}>Ordenes</span>
+                </div>
+            </Link>
+            
+            <Link href="/products" className="flex items-center justify-center w-full hover:bg-white/25 h-10">
+                <div className="flex items-center w-4/5">
+                    <ShoppingCartIcon className={`w-6 h-6 mr-4 ${route == '/products' ? 'primaryColor' : 'fill-gray-400'}`}/>
+                    <span className={`text-start text-gray-100 font-semibold text-sm w-full ${route == '/products' ? 'primaryColor' : ''}`}>Productos</span>
+                </div>
+            </Link>
 
+            <Link href="/users" className="flex items-center justify-center w-full hover:bg-white/25 h-10">
+                <div className="flex items-center w-4/5">
+                    <UserIcon className={`w-6 h-6 mr-4 ${route == '/users' ? 'primaryColor' : 'fill-gray-400'}`}/>
+                    <span className={`text-start text-gray-100 font-semibold text-sm w-full ${route == '/users' ? 'primaryColor' : ''}`}>Usuarios</span>
+                </div>
+            </Link>
         </div>
+
+        <div className={`flex items-center justify-center w-full hover:bg-white/25 h-10
+        ${admin ? '' : 'hidden'}`}>
+        <button onClick={handlerLogOut} className="flex items-center w-4/5">
+            <ArrowRightStartOnRectangleIcon className="w-6 h-6 mr-4"/>
+            <span className="text-start text-gray-100 font-semibold text-sm w-full">Cerrar sesión</span>
+        </button>
+        </div>
+        </div>
+
+    </div>
     )
 }

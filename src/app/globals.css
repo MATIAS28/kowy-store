@@ -2,8 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-  background-color: #CACACA;
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../../public/Montserrat.ttf') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: "Montserrat", sans-serif  !important;
+  font-optical-sizing: auto;
+}
+
+.nav{
+  background-color: #191919;
 }
 
 .primary{
@@ -20,4 +32,8 @@ body{
 
 .secondaryColor{
   color: #141414;
+}
+
+svg{
+  color: white;
 }

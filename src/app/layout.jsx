@@ -1,8 +1,5 @@
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { NavbarComponent } from "@/components/navbar";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Kowy Store",
@@ -11,15 +8,15 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-      <div className="md:flex w-full h-screen">
-        <NavbarComponent/>
+    <html lang="es">
+    <body className="h-screen overflow-hidden">
+      <div className="md:flex w-full h-full bg-gray-100">
+        <NavbarComponent />
         <div className="w-full overflow-y-auto">
           {children}
         </div>
       </div>
-      </body>
-    </html>
+    </body>
+  </html>
   );
 }

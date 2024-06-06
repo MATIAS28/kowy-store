@@ -166,26 +166,26 @@ export const ProductHandlerButton = ({setProduct, product, imgs, setImgs, imgsDe
 
     return(
         <div className="flex items-center">
-            { product && product._id  ? 
+            { product && product._id  ?  
             <button onClick={handlerUpdate} className="flex justify-center items-center bg-black p-2 rounded-md">
             <CloudArrowUpIcon className="w-5 h-5 mr-2 fill-white"/>
-            <span className="text-base font-semibold text-white">Actualizar</span>
+            <span className="text-sm font-semibold text-white">Actualizar</span>
             </button>
             :
             <button onClick={handlerCreate} className="flex justify-center items-center primary p-2 rounded-md">
             <CloudArrowUpIcon className="w-5 h-5 mr-2"/>
-            <span className="text-base font-semibold">Publicar</span>
+            <span className="text-sm font-semibold">Publicar</span>
             </button>
             }
 
             {product && product._id  &&
                 <div className="flex items-center">
                 <button onClick={handlerUpdateStatus} className={`flex justify-center items-center p-2 mx-2 rounded-md ${product && product.available  ? "primary" : "bg-black text-white"}`}>
-                <span className="text-base font-semibold">{product && product.available  ? "Disponible":"No disponible"}</span>
+                <span className="text-sm font-light">{product && product.available  ? "Disponible":"No disponible"}</span>
                 </button>
                 
                 <button onClick={handlerDeleteProduct} className="p-2 rounded-md">
-                    <TrashIcon className="w-6 h-6 hover:fill-red-700"/>
+                    <TrashIcon className="w-6 h-6 fill-black hover:fill-red-700"/>
                 </button>
                 </div>
             }

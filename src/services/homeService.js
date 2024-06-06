@@ -1,12 +1,12 @@
-import axios from "axios";
+import axiosInstance from "../../utils/axiosConfig";
 
-const ADMIN_URI = process.env.NEXT_PUBLIC_ADMIN_URL
 
 export const getGeneralStatistics = async (days) => {
     try {
-        const statistics = await axios.get(ADMIN_URI+'general-statistics/'+days)
+        const statistics = await axiosInstance.get('general-statistics/'+days)
         return statistics.data
     } catch (e) {
+        console.log(e);
         throw e
     }
 }
@@ -14,7 +14,7 @@ export const getGeneralStatistics = async (days) => {
 
 export const getPendingOrders = async () => {
     try {
-        const pendingOrders = await axios.get(ADMIN_URI+'pending-orders')
+        const pendingOrders = await axiosInstance.get('pending-orders')
         return pendingOrders.data
     } catch (e) {
         throw e
@@ -23,7 +23,7 @@ export const getPendingOrders = async () => {
 
 export const getBestSellers = async () => {
     try {
-        const products = await axios.get(ADMIN_URI+'best-sellers')
+        const products = await axiosInstance.get('best-sellers')
         return products.data
     } catch (e) {
         throw e
@@ -34,7 +34,7 @@ export const getOrders = async (delivered) => {
     const filter = delivered === null ? {} : {delivered: delivered}
     
     try{
-        const orders = await axios.post(ADMIN_URI+'orders', filter)
+        const orders = await axiosInstance.post('orders', filter)
         return orders.data
     } catch(e) {
       throw e

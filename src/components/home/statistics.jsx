@@ -37,10 +37,10 @@ export const StatisticsComponent = () => {
             </div>
 
             <div className="grid grid-cols-4 gap-4 my-4">
-                <div className="h-48 w-full bg-white/25 p-4 w-full rounded-lg drop-shadow-lg">
+                <div className="h-48 w-full bg-white p-4 w-full rounded">
                 {statistics && 
                     <div>
-                        <div className="bg-indigo-600 p-2 w-fit rounded-full">
+                        <div className="bg-black p-2 w-fit rounded-full">
                             <ChartBarIcon className="w-5 h-5 m-2 fill-white"/>
                         </div>
                         <div className="flex flex-col mt-4">
@@ -61,10 +61,10 @@ export const StatisticsComponent = () => {
                 }
                 </div>
 
-                <div className="h-48 w-full bg-white/25 p-4 w-full rounded-lg drop-shadow-lg">
+                <div className="h-48 w-full bg-white p-4 w-full rounded">
                 {statistics && 
                     <div>
-                        <div className="bg-red-600 p-2 w-fit rounded-full">
+                        <div className="bg-black p-2 w-fit rounded-full">
                             <TruckIcon className="w-5 h-5 m-2 fill-white"/>
                         </div>
                         <div className="flex flex-col mt-4">
@@ -85,10 +85,10 @@ export const StatisticsComponent = () => {
                 }
                 </div>
 
-                <div className="h-48 w-full bg-white/25 p-4 w-full rounded-lg drop-shadow-lg">
+                <div className="h-48 w-full bg-white p-4 w-full rounded">
                     {statistics && 
                     <div>
-                        <div className="bg-green-600 p-2 w-fit rounded-full">
+                        <div className="bg-black p-2 w-fit rounded-full">
                             <UserIcon className="w-5 h-5 m-2 fill-white"/>
                         </div>
                         <div className="flex flex-col mt-4">
@@ -109,10 +109,10 @@ export const StatisticsComponent = () => {
                     }
                 </div>
 
-                <div className="h-48 w-full bg-white/25 p-4 w-full rounded-lg drop-shadow-lg">
+                <div className="h-48 w-full bg-white p-4 w-full rounded">
                     {statistics && 
                     <div>
-                        <div className="primary p-2 w-fit rounded-full">
+                        <div className="bg-black p-2 w-fit rounded-full">
                             <ShoppingCartIcon className="w-5 h-5 m-2 fill-white"/>
                         </div>
                         <div className="flex flex-col my-4">

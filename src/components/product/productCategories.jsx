@@ -16,7 +16,7 @@ export const ProductCategoriesComponent = ({setProduct, product}) => {
                 <option value="" className="text-gray-300 font-light border-b">Agrega una categoría</option>
                 {categories.map((category, i) => {
                     return(
-                        <option key={i} value={category}>
+                        <option key={i} className="text-sm" value={category}>
                             {category.toUpperCase()}
                         </option>
                     )

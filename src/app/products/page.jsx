@@ -66,20 +66,20 @@ export default function ProductsPage (){
                 </div>
             </div>
 
-            <div className="flex items-center my-4">
-            <button className={`text-sm font-semibold py-[0.15rem] mr-4 
+        <div className="flex items-center my-4">
+            <button className={`text-xs font-semibold py-[0.15rem] mr-4 
             ${filter == null ? 'border-b-2 border-black': ''}`}
             onClick={() => setFilter(null)}>
                 Todas los productos
             </button>
 
-            <button className={`text-sm font-semibold py-[0.15rem] mr-4 
+            <button className={`text-xs font-semibold py-[0.15rem] mr-4 
             ${filter == false ? 'border-b-2 border-black': ''}`}
             onClick={() => setFilter(false)}>
                 En descuento
             </button>
 
-            <button className={`text-sm font-semibold py-[0.15rem] mr-4 
+            <button className={`text-xs font-semibold py-[0.15rem] mr-4 
             ${filter == true ? 'border-b-2 border-black': ''}`}
             onClick={() => setFilter(true)}>
                 Nuevos
@@ -88,7 +88,7 @@ export default function ProductsPage (){
 
         <div className="grid grid-cols-3 gap-6">
 
-            <Link href={'/products/create-product'} className="flex justify-center w-80  items-center bg-white/25 hover:bg-white/50 rounded-lg cursor-pointer w-80">
+            <Link href={'/products/create-product'} className="flex justify-center w-80  items-center bg-gray-200 hover:shadow-md duration-150 rounded-lg cursor-pointer w-80">
             <PlusIcon className="w-28 h-12 fill-white"/>
             </Link>
 

@@ -17,8 +17,6 @@ export default function HomePage() {
         <BestSellersComponent/>
       </div>
 
-      <MostClickedComponent/>
-
     </div>
   );
 }

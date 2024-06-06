@@ -1,9 +1,8 @@
-import axios from "axios"
-const ADMIN_URI = process.env.NEXT_PUBLIC_ADMIN_URL
+import axiosInstance from "../../utils/axiosConfig";
 
 export const getAllProducts = async () => {
     try {
-        const products = await axios.get(ADMIN_URI+'all-products')
+        const products = await axiosInstance.get('all-products')
         console.log(products);
         return products.data
     } catch (e) {
@@ -13,7 +12,7 @@ export const getAllProducts = async () => {
 
 export const getProduct = async (id) => {
     try {
-        const product = await axios.get(ADMIN_URI+'product/'+id)
+        const product = await axiosInstance.get('product/'+id)
         return product.data
     } catch (e) {
         throw e
@@ -22,7 +21,7 @@ export const getProduct = async (id) => {
 
 export const searchProduct = async (search) => {
     try {
-        const products = await axios.post(ADMIN_URI+'search-product', {name: search})
+        const products = await axiosInstance.post('search-product', {name: search})
         console.log(products);
         return products.data
     } catch (e) {
@@ -56,7 +55,7 @@ export const saveProduct = async (newProduct, imgs) => {
     }
 
     try {
-        const productSaved = await axios.post(ADMIN_URI+'product', formData, 
+        const productSaved = await axiosInstance.post('product', formData, 
         {headers: {'Content-Type': 'multipart/form-data'}})
 
         return productSaved.data
@@ -84,7 +83,7 @@ export const updateProduct = async (product, imgs, imgsDeleted) => {
     }
 
     try {
-        const productUpdated = await axios.post(ADMIN_URI+'update-product/'+product._id, formData,
+        const productUpdated = await axiosInstance.post('update-product/'+product._id, formData,
         {headers: {'Content-Type': 'multipart/form-data'}})
         return productUpdated.data
     } catch (e) {
@@ -96,8 +95,7 @@ export const updateProduct = async (product, imgs, imgsDeleted) => {
 
 export const deleteProduct = async (id) => {
     try {
-        const productDeleted = await axios.delete(ADMIN_URI+'product/'+id)
-        console.log(productDeleted);
+        const productDeleted = await axiosInstance.delete('product/'+id)
         return productDeleted.data
     } catch (e) {
         throw e
@@ -107,7 +105,7 @@ export const deleteProduct = async (id) => {
 
 export const updateStatus = async (id, status) => {
     try {
-        const statusUpdated = await axios.post(ADMIN_URI+'update-status/'+id+'/'+!status)
+        const statusUpdated = await axiosInstance.post('update-status/'+id+'/'+!status)
         return statusUpdated.data
     } catch (e) {
         throw e

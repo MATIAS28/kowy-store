@@ -64,7 +64,7 @@ export default function ProductPage ({params}){
                     <h1 className="text-3xl font-semibold">Producto</h1>
                     <div className="flex items-center">
                     <HashtagIcon className="w-4 h-4 fill-gray-700"/>
-                    <span className="text-lg text-gray-700 uppercase">{product._id || params.id}</span>
+                    <span className="font-light text-gray-700 uppercase">{product._id || params.id}</span>
                     </div>
                 </div>
 
@@ -81,38 +81,40 @@ export default function ProductPage ({params}){
                 <div className="grid grid-cols-1 gap-6 w-4/5">
                     <div className="flex flex-col">
                     <label htmlFor="brand" className="text-xs font-semibold">Marca</label>
-                    <input name="brand" onChange={handlerProduct} className="bg-transparent border-b-2 border-b-gray-500 appearance-none focus:outline-none focus:border-b-blue-500 text-xl font-semibold" type="text" defaultValue={product?.brand}/>
+                    <input name="brand" onChange={handlerProduct} className="bg-transparent border-b-2 border-b-gray-500 appearance-none focus:outline-none focus:border-b-blue-500 font-light" type="text" defaultValue={product?.brand}/>
                     </div>
 
                     <div className="flex flex-col">
                     <label htmlFor="name" className="text-xs font-semibold">Nombre</label>
-                    <input name="name" onChange={handlerProduct} className="bg-transparent border-b-2 border-b-gray-500 appearance-none focus:outline-none focus:border-b-blue-500 text-xl font-semibold" type="text" defaultValue={product?.name}/>
+                    <input name="name" onChange={handlerProduct} className="bg-transparent border-b-2 border-b-gray-500 appearance-none focus:outline-none focus:border-b-blue-500 font-light" type="text" defaultValue={product?.name}/>
                     </div>
 
                     <div className="my-2">
                         <label htmlFor="sizes" className="text-xs font-semibold">Añade un talle</label>
-                        <div className="flex items-center">
+                        <div>
+                            <div className="flex items-center">
                             <input id="sizes" name="sizes" onChange={(e) => setSizes({...sizes, size: e.target.value})} 
-                            className="w-20 bg-white/25 appearance-none focus:outline-none p-1 rounded-md mr-2" placeholder="Talle" type="text"/>
+                            className="w-20 bg-white/25 appearance-none focus:outline-none p-2 text-sm font-light rounded-md mr-2" placeholder="Talle" type="text"/>
                             
                             <input id="quantity" name="quantity" onChange={(e) => setSizes({...sizes, quantity: e.target.value})} 
-                            className="w-20 bg-white/25 appearance-none focus:outline-none p-1 rounded-md" placeholder="cant" min="1" type="number"/>
+                            className="w-20 bg-white/25 appearance-none focus:outline-none p-2 text-sm font-light rounded-md" placeholder="cant" min="1" type="number"/>
                             
                             <button disabled={!(sizes.size.length > 0 && sizes.quantity > 0)} onClick={handlerAddSizes} className="bg-black ml-2 p-1 rounded-md h-full">
                             <PlusIcon className="w-3 h-4 fill-white"/>
                             </button>
+                            </div>
 
-                            <div className="flex items-center w-4/5 overflow-x-auto ml-2">
+                            <div className="flex items-center w-4/5 overflow-x-auto mt-4 py-2">
                             {product && product?.sizes && product?.sizes.length > 0 &&
                                 product.sizes.map((size, i) => {
                                     return(
-                                        <div key={i} className="flex items-center bg-white/50 rounded-md mr-2 p-1">
-                                            <div className="px-2">
-                                                <span className="text-sm font-semibold">{size.size}/</span>
-                                                <span className="text-sm font-semibold">{size.quantity}</span>
+                                        <div key={i} className="flex items-center bg-gray-200 rounded-md mr-2">
+                                            <div className="flex items-center divide-x divide-gray-900 space-x-2 mr-2">
+                                                <span className="text-sm font-semibold px-2 py-1">{size.size}</span>
+                                                <span className="text-sm font-semibold px-2 py-1">{size.quantity}</span>
                                             </div>
-                                            <button onClick={() => deleteSize(size)}>
-                                                <XMarkIcon className="w-4 h-4 fill-red-700"/>
+                                            <button onClick={() => deleteSize(size)} className="p-1 bg-black rounded-r-md">
+                                                <XMarkIcon className="w-5 h-5"/>
                                             </button>
                                         </div>
                                             )
@@ -128,7 +130,7 @@ export default function ProductPage ({params}){
 
                     <div className="flex flex-col">
                     <label htmlFor="description" className="text-xs font-semibold">Descripción</label>
-                    <input name="description" onChange={handlerProduct} className="bg-white/25 p-2 text-sm appearance-none focus:outline-none focus:border-b-blue-500 font-light my-2 rounded-md" type="text" defaultValue={product?.description}/>
+                    <textarea name="description" onChange={handlerProduct} className="bg-white/25 break-words p-2 text-sm appearance-none focus:outline-none focus:border-b-blue-500 font-light my-2 rounded-md" type="text" defaultValue={product?.description}></textarea>
                     </div>
 
                     <div className="flex items-center">
