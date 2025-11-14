@@ -21,7 +21,7 @@ function Home(){
                 </div>
 
                 <div className="w-full h-fit">
-                <img className="w-full h-[28rem] rounded-lg" src="https://jungleindumentaria.co/wp-content/uploads/2022/05/buzo-con-capota-Nasa-gris-jaspe-680x1020.jpg" alt=""/>
+                <img className="w-full h-[28rem] rounded-lg" src="https://feidclothes.com/cdn/shop/files/2C423422-BAD1-48C6-873F-FC715A210264.jpg?v=1744330751&width=1445" alt=""/>
                 <div className="flex justify-center">
                     <p className="text-3xl text-white font-bold">BUZOS</p>
                 </div>
